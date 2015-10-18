@@ -1,6 +1,6 @@
 os:
-  - linux
-  - osx
+- linux
+- osx
 env:
   matrix:
   # CONDA_PY and CONDA_NPY are the env variable of python version
@@ -8,7 +8,7 @@ env:
   # to build the packages.
   - CONDA_PY=34  CONDA_NPY=18
   global:
-  - secure: IHm35NdR7CN8+f9kR6bdrTVMWsxp4QQaNfBAZWJLAVmaZmaX9PLVv2c2wueiuca6p3V90+AI1gtLJHvseF50Wua3ce3JPztU/4cyNLB5sahRI5QJYGzXbH294QR/Rvaz6AW8F8tDLSkkVO/xjiW+OPP5JfEEm2qBpS7viNX9JxPnqUeHU5IGW1aTa70mk7Onr5wigDkpUGGrqjO2EtIUBFGs4XtGKCtjk4SWaffHAFSs22ooQrXRLZRPlG7WBkwsyF/AeoPYYQPxl9F0cRRQjVYM7Vvn7nhg5VEdms0vJpWgVfU5wIVoDPHafOc4ynxgz0vbxNDyUAKIIslrIm6dEB6hLhmrm5kO16IXhpJ3JL0vlsXEUan1hdFc+uqlJayD6RgjjsZiySGF9e9saro9uJdySbyqwQTA8f8+24ZjJff3ghwQQWV8jNfyOWm4QXGOM/jVakBNE1puXm6YmEiGdR/lSYNyHP66HNYX+smRxcM7d9YKtBO1+95ixnCDJTe/0tmkWeQET9QlBfzuEkOaIdsbG6qOjf8vfhOljfsnzNJqoxrqpMxQzFAp2qbFSTWeTQ2eF19XfvtEqgKS0r+uFbc1UDsAQQPD4XG+60d2e5Tthbn1cOu821QwOH33taWovjNVVLJGtDqW20n3AobBP0iR90KJhf89wBAcKpIidiw=
+  - secure: UNboHeMTM5eW+/V9fMZ+vplAcw5ZHdu83btW5rgjnFYr0x9QsyrayxSDRufRh4g44agEmnmilOoMwCDJSNgRKXqgCLRa91MNsVhYb4XOv4i/rQ5oK3lristVWQI+Gu3tK9iS450ud7/X/+dc+76m6LuaqEeNwry4OrxsNfqikredJ7fO7/GlahJv+gh+LLHGQC/oWjLPtBAwynPbNjpjvZjNUAFMbqLS13HgXRtXSMFUoulkgxGhsAJaGLd8WTPmGtb1zrH3Jr67hYgQ8XAMuGk7cfQ/p07GfxMUa/VUwWWAJ/06deGhlD2yvTdm9ISOJ7GwOFniLLzaWybKb8PIGQYkXY+2/id1XvLZslGz2O3qo2J3zkwZbMaDzIvmEXbSWmTxxq5VOvS7CNwtnCB6wnkd/ajl71bUVui+paL54Ky3w8DC3gK58ZmO97LNCPwuV4fY4NRF+AqMc2iyxbhj4mjJnzJFbIpTdgIKnJvVz9rP3yJhsdRQM2f+C6Eux2JydMpkdaD5NjdtA9T9DBkm8qsgZMCj4tBWL2o0BMMejoa61VeoEwMz/tBNMSOv13bsMYzJ+58jBQxXSRqqE80K5mLS6qtmxkGEWvHf9QKOtNb4EsVphyyVvBVJWc+GhEcf43p6z9hrdgtUzJPA3Ey8gyaoVkysiqPA+QZSASA9XT4=
 install:
 - source ci/travis/install.sh
 script:

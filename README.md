@@ -1,9 +1,9 @@
 # Conda Recipes
 [![Travis Build Status](https://travis-ci.org/RNAer/conda-recipes.png?branch=master)](https://travis-ci.org/RNAer/conda-recipes)
 
-Anaconda
+Conda is a package manager application that quickly installs, runs, and updates packages and their dependencies.
 
-This repository hosts conda recipes for various biocore packages or dependencies. The idea is to build binary executables for the widely used bioinformatic tools and host them on [anaconda cloud](http://anaconda.org).
+This repository hosts conda recipes for various biocore packages or dependencies. The idea is to the widely used bioinformatic tools readily installable and host them on [anaconda cloud](http://anaconda.org).
 
 This will make the software installation much easier for users who do not have much command line experience.
 
@@ -22,7 +22,7 @@ To install the software, you just need to run:
 No endless headache of time-consuming compilation and missing dependecies any more!
 
 
-# Create a new conda recipe
+## Create a new conda recipe
 To add a new piece of software to the pool, you need to create a recipe to tell conda how to build it.
 
 How to create a recipe is documented on [conda website](http://conda-test.pydata.org/docs/build.html).
@@ -30,7 +30,7 @@ How to create a recipe is documented on [conda website](http://conda-test.pydata
 You can also borrow from the examples located in this repository: [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes)
 
 
-# Build a conda package
+## Build a conda package
 You need to install the following mandatory toolset before building a package.
 
     conda install anaconda-client
@@ -42,7 +42,7 @@ Once you install the toolset and create your recipe, you can build the package w
 
 Please see the conda [build docs](http://conda.pydata.org/docs/building/build.html) for further information.
 
-# Upload a conda package
+## Upload a conda package
 To upload your built package to anaconda for others to download and install, you need to create an account [here](https://anaconda.org).
 
 You will need to login with your account credentials you just created:
@@ -62,5 +62,5 @@ Now other people can download and install your package (given it is public):
 
     conda install -c <your-channel> <package-name>
 
-# Contribute your recipes to this repo
+## Contribute your recipes to this repo
 You can add your new recipe into this repo. Each recipe needs to be in its own directory under [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). Once your issue a pull request to merge your recipe into this repo, a Travis continuous integration (CI) will run and test your recipe by building the package and uploading it to [biocore](https://anaconda.org/biocore). If Travis CI is passed, congrats! Your package will be available to download from biocore.

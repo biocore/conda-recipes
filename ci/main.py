@@ -1,9 +1,10 @@
 import sys
+import json
 import yaml
 import glob
 from os import walk, environ
 from os.path import join
-from subprocess import check_call, CalledProcessError
+from subprocess import check_call, check_output, CalledProcessError
 from conda_build.config import config
 
 
@@ -34,9 +35,12 @@ def build_upload(name, version, root):
                      CHANNEL, name, version)
     print('CHECKING COMMAND: {0}'.format(check_cmd))
     try:
-        check_call(check_cmd, shell=True)
-    except CalledProcessError:
-        # this built does not exist in the channel
+        out = check_output(check_cmd, shell=True)
+    except CalledProcessError as e:
+        # this built version does not exist in the channel
+        out = e.output
+    res = json.loads(out)
+    if name not in res:
         built_glob = join(
             config.bldpkgs_dir,
             '{0}-{1}*.tar.bz2'.format(name, version))
