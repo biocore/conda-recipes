@@ -1,21 +1,23 @@
 # Conda Recipes
 [![Travis Build Status](https://travis-ci.org/RNAer/conda-recipes.png?branch=master)](https://travis-ci.org/RNAer/conda-recipes)
 
-Conda is a package manager application that quickly installs, runs, and updates packages and their dependencies.
+Conda is a package manager application that quickly installs, runs, and updates packages and their dependencies. It was originally for Python virtual environment management, but it can essentially handle any type of packages in a isolated virtual environment.
 
-This repository hosts conda recipes for various biocore packages or dependencies. The idea is to the widely used bioinformatic tools readily installable and host them on [anaconda cloud](http://anaconda.org).
+This repository hosts conda recipes for various biocore packages or dependencies. The idea is to make bioinformatic tools readily installable and host them on [anaconda cloud](http://anaconda.org).
 
-This will make the software installation much easier for users who do not have much command line experience.
+This will make software installation much easier for users who do not have much command line experience.
 
 Currently, the following packages (and their versions) are built and available on anaconda organization named [biocore](https://anaconda.org/biocore):
 
-HMMER: [![Binstar Badge](https://anaconda.org/biocore/hmmer/badges/version.svg)](https://anaconda.org/biocore/hmmer)
+* HMMER: [![Binstar Badge](https://anaconda.org/biocore/hmmer/badges/version.svg)](https://anaconda.org/biocore/hmmer)
 
-Infernal: [![Binstar Badge](https://anaconda.org/biocore/infernal/badges/version.svg)](https://anaconda.org/biocore/infernal)
+* Infernal: [![Binstar Badge](https://anaconda.org/biocore/infernal/badges/version.svg)](https://anaconda.org/biocore/infernal)
 
-Prodigal: [![Binstar Badge](https://anaconda.org/biocore/prodigal/badges/version.svg)](https://anaconda.org/biocore/prodigal)
+* Prodigal: [![Binstar Badge](https://anaconda.org/biocore/prodigal/badges/version.svg)](https://anaconda.org/biocore/prodigal)
 
-To install the software, you just need to run:
+
+
+To install a package, you just need to run:
 
     conda install -c https://anaconda.org/biocore <package-name>
 
@@ -23,7 +25,7 @@ No endless headache of time-consuming compilation and missing dependecies any mo
 
 
 ## Create a new conda recipe
-To add a new piece of software to the pool, you need to create a recipe to tell conda how to build it.
+To add a new package to the pool, you need to create a recipe to tell conda how to build it.
 
 How to create a recipe is documented on [conda website](http://conda-test.pydata.org/docs/build.html).
 
@@ -53,7 +55,7 @@ And use this command to upload:
 
     anaconda upload <path-to-your-conda-package.tar.bz2>
 
-You can find the path of the built package with following commands:
+You can find the path to the built package with following commands:
 
     cd <recipe-directory>
     conda build . --output
@@ -63,4 +65,4 @@ Now other people can download and install your package (given it is public):
     conda install -c <your-channel> <package-name>
 
 ## Contribute your recipes to this repo
-You can add your new recipe into this repo. Each recipe needs to be in its own directory under [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). Once your issue a pull request to merge your recipe into this repo, a Travis continuous integration (CI) will run and test your recipe by building the package and uploading it to [biocore](https://anaconda.org/biocore). If Travis CI is passed, congrats! Your package will be available to download from biocore.
+We encourage you to add your new recipe into this repo. Each recipe should be in its own directory under [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). Once you issue a pull request to merge your recipe into this repo, a Travis continuous integration (CI) will run and test your recipe by building the package and uploading it to [biocore](https://anaconda.org/biocore). If Travis CI is passed, congrats! Your package will be available to download and install from biocore.
