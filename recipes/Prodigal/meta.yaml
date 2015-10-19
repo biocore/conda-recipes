@@ -8,17 +8,15 @@ source:
 
 build:
   detect_binary_files_with_prefix: True
- 
+
 requirements:
   build:
     - gcc
-  run:
-    - libgcc
- 
+
 test:
   commands:
     - prodigal -h
- 
+
 about:
   summary: Fast, reliable protein-coding gene prediction for prokaryotic genomes.
   home: https://github.com/hyattpd/Prodigal
