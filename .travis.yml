@@ -1,0 +1,15 @@
+os:
+- linux
+- osx
+env:
+  matrix:
+  # CONDA_PY and CONDA_NPY are the env variable of python version
+  # and numpy version used by "conda build"
+  # to build the packages.
+  - CONDA_PY=34  CONDA_NPY=18
+  global:
+  - secure: UNboHeMTM5eW+/V9fMZ+vplAcw5ZHdu83btW5rgjnFYr0x9QsyrayxSDRufRh4g44agEmnmilOoMwCDJSNgRKXqgCLRa91MNsVhYb4XOv4i/rQ5oK3lristVWQI+Gu3tK9iS450ud7/X/+dc+76m6LuaqEeNwry4OrxsNfqikredJ7fO7/GlahJv+gh+LLHGQC/oWjLPtBAwynPbNjpjvZjNUAFMbqLS13HgXRtXSMFUoulkgxGhsAJaGLd8WTPmGtb1zrH3Jr67hYgQ8XAMuGk7cfQ/p07GfxMUa/VUwWWAJ/06deGhlD2yvTdm9ISOJ7GwOFniLLzaWybKb8PIGQYkXY+2/id1XvLZslGz2O3qo2J3zkwZbMaDzIvmEXbSWmTxxq5VOvS7CNwtnCB6wnkd/ajl71bUVui+paL54Ky3w8DC3gK58ZmO97LNCPwuV4fY4NRF+AqMc2iyxbhj4mjJnzJFbIpTdgIKnJvVz9rP3yJhsdRQM2f+C6Eux2JydMpkdaD5NjdtA9T9DBkm8qsgZMCj4tBWL2o0BMMejoa61VeoEwMz/tBNMSOv13bsMYzJ+58jBQxXSRqqE80K5mLS6qtmxkGEWvHf9QKOtNb4EsVphyyVvBVJWc+GhEcf43p6z9hrdgtUzJPA3Ey8gyaoVkysiqPA+QZSASA9XT4=
+install:
+  - source ci/travis/install.sh
+script:
+  - python ci/main.py recipes

@@ -1,0 +1,24 @@
+package:
+  name: prodigal
+  version: "2.6.2"
+
+source:
+  git_rev: v2.6.2
+  git_url: https://github.com/hyattpd/Prodigal.git
+
+build:
+  detect_binary_files_with_prefix: True
+
+requirements:
+  build:
+    - gcc
+
+test:
+  commands:
+    - prodigal -h
+
+about:
+  summary: Fast, reliable protein-coding gene prediction for prokaryotic genomes.
+  home: https://github.com/hyattpd/Prodigal
+  license: GPL
+  license_file: LICENSE
