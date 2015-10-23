@@ -15,6 +15,7 @@ Currently, the following packages (and their versions) are built and available o
 
 * [Prodigal](https://github.com/hyattpd/Prodigal): [![Binstar Badge](https://anaconda.org/biocore/prodigal/badges/version.svg)](https://anaconda.org/biocore/prodigal)
 
+* [VSEARCH](https://github.com/torognes/vsearch): [![Binstar Badge](https://anaconda.org/biocore/vsearch/badges/version.svg)](https://anaconda.org/biocore/vsearch)
 
 
 To install a package, you just need to run:
