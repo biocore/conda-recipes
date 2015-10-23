@@ -15,7 +15,7 @@ test:
     - vsearch -h
  
 about:
-  summary: VSEARCH: a versatile open source tool for metagenomics
+  summary: VSEARCH, a versatile open source tool for metagenomics
   home: https://github.com/torognes/vsearch
   license: GPL/BSD
   license_file: LICENSE.txt
