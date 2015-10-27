@@ -22,6 +22,7 @@ def build_upload_recipes(p):
                 build_number = pkg['build_number']
                 if is_already_uploaded(name, version, build_number):
                     # Only new packages (either version or build_number)
+                    print("Skipping package: {0}-{1}".format(name, version))
                     continue
                 build(name, version, root)
                 if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
