@@ -22,8 +22,13 @@ def build_upload_recipes(p, channel):
         has_recipe = 'meta.yaml' in files
         if not dirs and has_recipe:
             with open(os.path.join(root, 'meta.yaml')) as f:
+                print('PROCESSING {0}'.format(root))
                 meta = yaml.load(f)
-                build_n = meta['build']['number']
+                try:
+                    build_n = meta['build']['number']
+                except KeyError:
+                    # if not specified, the build number is 0 by default
+                    build_n = 0
                 pkg = meta['package']
                 name = pkg['name']
                 version = pkg['version']
@@ -61,34 +66,29 @@ def check(name, version, build_n, channel):
     '''
     cmd = ('conda search --json --override-channels '
            '-c {0} --spec {1}').format(channel, name)
-    print('CHECKING COMMAND: {0}'.format(cmd))
+    print('CHECK COMMAND: {0}'.format(cmd))
     out = check_output(cmd, shell=True)
     res = json.loads(out)
     if name not in res:
         return True
-    if version != res[name][1]['version']:
+    if version != res[name][0]['version']:
         return True
-    if build_n > res[name][0]['build_n']:
+    if build_n > res[name][0]['build_number']:
         return True
     return False
 
 
-def build(name, version, root):
+def build(root):
     '''Build a recipe.
 
     Parameters
     ----------
-    name : str
-        package name.
-    version : str
-        package version.
     root : str
         the directory path for the recipe.
     '''
-    print("Building package: {0}-{1}".format(name, version))
     # Quote is need in case the root path has spaces in it.
     cmd = 'conda build "{0}"'.format(root)
-    print('BUILDING COMMAND: {0}'.format(cmd))
+    print('BUILD COMMAND: {0}'.format(cmd))
     check_call(cmd, shell=True)
 
 
@@ -109,7 +109,7 @@ def upload(name, version, channel):
     built = glob.glob(built_glob)[0]
     cmd = 'anaconda -t {token} upload -u {channel} {built}'
     # Do not show decrypted token!
-    print('UPLOADING COMMAND: {0}'.format(cmd))
+    print('UPLOAD COMMAND: {0}'.format(cmd))
     check_call(
         cmd.format(token=os.environ['ANACONDA_TOKEN'],
                    channel=channel,
