@@ -19,7 +19,8 @@ def build_upload_recipes(p):
                 pkg = yaml.load(f)['package']
                 name = pkg['name']
                 version = pkg['version']
-                build_number = pkg['build_number']
+                # If no build number stated in the recipe, consider it 0
+                build_number = pkg.get('build_number', 0)
                 if is_already_uploaded(name, version, build_number):
                     # Only new packages (either version or build_number)
                     print("Skipping package: {0}-{1}".format(name, version))
