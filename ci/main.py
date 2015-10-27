@@ -16,11 +16,14 @@ def build_upload_recipes(p):
         has_recipe = 'meta.yaml' in files
         if not dirs and has_recipe:
             with open(os.path.join(root, 'meta.yaml')) as f:
-                pkg = yaml.load(f)['package']
-                name = pkg['name']
-                version = pkg['version']
-                # If no build number stated in the recipe, consider it 0
-                build_number = pkg.get('build_number', 0)
+                meta = yaml.load(f)
+                name = meta['package']['name']
+                version = meta['package']['version']
+                try:
+                    build_number = meta['build']['number']
+                except KeyError:
+                    # Build number is 0 if not specified
+                    build_number = 0
                 if is_already_uploaded(name, version, build_number):
                     # Only new packages (either version or build_number)
                     print("Skipping package: {0}-{1}".format(name, version))
