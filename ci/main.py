@@ -3,9 +3,19 @@ import sys
 import json
 import yaml
 import glob
+import logging
 from subprocess import check_call, check_output
 
 from conda_build.config import config
+
+
+log = logging.getLogger(__name__)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(
+    logging.Formatter('%(asctime)s %(levelname)s:%(message)s'))
+handler.setLevel(logging.INFO)
+log.addHandler(handler)
+log.setLevel(logging.INFO)
 
 
 def build_upload_recipes(p, channel):
@@ -22,7 +32,7 @@ def build_upload_recipes(p, channel):
         has_recipe = 'meta.yaml' in files
         if not dirs and has_recipe:
             with open(os.path.join(root, 'meta.yaml')) as f:
-                print('PROCESSING {0}'.format(root))
+                log.info('process {0}.'.format(root))
                 meta = yaml.load(f)
                 try:
                     build_n = meta['build']['number']
@@ -37,7 +47,9 @@ def build_upload_recipes(p, channel):
                     if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
                         upload(name, version, channel)
                     else:
-                        print("Uploading not available in Pull Requests")
+                        log.warning('uploading not available in Pull Request.')
+                else:
+                    log.info('skip building {0}.'.format(root))
 
 
 def check(name, version, build_n, channel):
@@ -66,7 +78,7 @@ def check(name, version, build_n, channel):
     '''
     cmd = ('conda search --json --override-channels '
            '-c {0} --spec {1}').format(channel, name)
-    print('CHECK COMMAND: {0}'.format(cmd))
+    log.info('check: {0}'.format(cmd))
     out = check_output(cmd, shell=True)
     res = json.loads(out)
     if name not in res:
@@ -88,7 +100,7 @@ def build(root):
     '''
     # Quote is need in case the root path has spaces in it.
     cmd = 'conda build "{0}"'.format(root)
-    print('BUILD COMMAND: {0}'.format(cmd))
+    log.info('build: {0}'.format(cmd))
     check_call(cmd, shell=True)
 
 
@@ -109,7 +121,7 @@ def upload(name, version, channel):
     built = glob.glob(built_glob)[0]
     cmd = 'anaconda -t {token} upload -u {channel} {built}'
     # Do not show decrypted token!
-    print('UPLOAD COMMAND: {0}'.format(cmd))
+    log.info('upload: {0}'.format(cmd))
     check_call(
         cmd.format(token=os.environ['ANACONDA_TOKEN'],
                    channel=channel,
