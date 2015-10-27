@@ -3,7 +3,7 @@ import sys
 import json
 import yaml
 import glob
-from subprocess import check_call, check_output, CalledProcessError
+from subprocess import check_call, check_output
 
 from conda_build.config import config
 
@@ -19,6 +19,10 @@ def build_upload_recipes(p):
                 pkg = yaml.load(f)['package']
                 name = pkg['name']
                 version = pkg['version']
+                build_number = pkg['build_number']
+                if is_already_uploaded(name, version, build_number):
+                    # Only new packages (either version or build_number)
+                    continue
                 build(name, version, root)
                 if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
                     upload(name, version)
@@ -34,29 +38,30 @@ def build(name, version, root):
     check_call(build_cmd, shell=True)
 
 
-def upload(name, version):
+def is_already_uploaded(name, version, build_number):
     check_cmd = ('conda search --json --override-channels '
                  '-c {0} --spec {1}={2}').format(
                      CHANNEL, name, version)
     print('CHECKING COMMAND: {0}'.format(check_cmd))
-    try:
-        out = check_output(check_cmd, shell=True)
-    except CalledProcessError as e:
-        # This built version does not exist in the channel
-        out = e.output
+    out = check_output(check_cmd, shell=True)
     res = json.loads(out)
-    if name not in res:
-        built_glob = os.path.join(
-            config.bldpkgs_dir,
-            '{0}-{1}*.tar.bz2'.format(name, version))
-        built = glob.glob(built_glob)[0]
-        upload_cmd = 'anaconda -t {token} upload -u biocore {built}'
-        # Do not show decrypted token!
-        print('UPLOADING COMMAND: {0}'.format(upload_cmd))
-        check_call(
-            upload_cmd.format(
-                token=os.environ['ANACONDA_TOKEN'], built=built),
-            shell=True)
+    return all(name in res,
+               res[name][0]['version'] == version,
+               res[name][0]['build_number'] == build_number)
+
+
+def upload(name, version):
+    built_glob = os.path.join(
+        config.bldpkgs_dir,
+        '{0}-{1}*.tar.bz2'.format(name, version))
+    built = glob.glob(built_glob)[0]
+    upload_cmd = 'anaconda -t {token} upload -u biocore {built}'
+    # Do not show decrypted token!
+    print('UPLOADING COMMAND: {0}'.format(upload_cmd))
+    check_call(
+        upload_cmd.format(
+            token=os.environ['ANACONDA_TOKEN'], built=built),
+        shell=True)
 
 
 if __name__ == '__main__':
