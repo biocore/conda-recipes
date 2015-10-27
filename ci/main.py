@@ -19,16 +19,22 @@ def build_upload_recipes(p):
                 pkg = yaml.load(f)['package']
                 name = pkg['name']
                 version = pkg['version']
-                build_upload(name, version, root)
+                build(name, version, root)
+                if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
+                    upload(name, version)
+                else:
+                    print("Uploading not available in Pull Requests")
 
 
-def build_upload(name, version, root):
+def build(name, version, root):
     print("Building package: {0}-{1}".format(name, version))
     # Quote is need in case the root path has spaces in it.
     build_cmd = 'conda build "%s"' % root
     print('BUILDING COMMAND: {0}'.format(build_cmd))
     check_call(build_cmd, shell=True)
 
+
+def upload(name, version):
     check_cmd = ('conda search --json --override-channels '
                  '-c {0} --spec {1}={2}').format(
                      CHANNEL, name, version)
