@@ -118,4 +118,4 @@ def upload(name, version, channel):
 
 
 if __name__ == '__main__':
-    build_upload_recipes(sys.argv[1], 'zechxu')
+    build_upload_recipes(sys.argv[1], sys.argv[2])
