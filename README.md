@@ -31,6 +31,20 @@ How to create a recipe is documented on [conda's website](http://conda-test.pyda
 
 You can also borrow from the examples located in this repository: [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). There are also lots of examples in conda's conda-recipes [repository](https://github.com/conda/conda-recipes/).
 
+## Modify an existing conda recipe
+If you modified an existing recipe in this repository and would like to merge it back, you should increment the build number by one. This will trigger the rebuilding of the package upon your updated recipe.
+
+For example, if the current recipe has this in the `meta.yaml`:
+
+	build:
+	  number: 1
+
+you should change it to the following after you modify it:
+
+	build:
+	  number: 2
+
+If there is no such section in `meta.yaml`, the build number defaults to zero. You should set it to 1 after modifying it. Please see the documentation [here](http://conda.pydata.org/docs/building/meta-yaml.html#build-number-and-string)
 
 ## Build a conda package
 You need to install the following mandatory toolset before building a package.
