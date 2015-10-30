@@ -12,4 +12,4 @@ env:
 install:
   - source ci/travis/install.sh
 script:
-  - python ci/main.py recipes
+  - python ci/main.py recipes biocore
