@@ -97,9 +97,9 @@ def is_already_uploaded(name, version, build_number, channel):
     log.info('Checking: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
     res = json.loads(out)
-    return all((name in res,
-                res[name][0]['version'] == version,
-                res[name][0]['build_number'] >= build_number))
+    return (name in res and
+            res[name][0]['version'] == version and
+            res[name][0]['build_number'] >= build_number)
 
 
 def upload(name, version, channel):
