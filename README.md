@@ -32,7 +32,7 @@ How to create a recipe is documented on [conda's website](http://conda-test.pyda
 You can also borrow from the examples located in this repository: [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). There are also lots of examples in conda's conda-recipes [repository](https://github.com/conda/conda-recipes/).
 
 ## Modify an existing conda recipe
-If you modified an existing recipe in this repository and would like to merge it back, you should increment the build number by one. This will trigger the rebuilding of the package upon your updated recipe.
+If you modified an existing recipe in this repository and would like to merge it back, you should increment the build number by one in order to trigger a package rebuild. This is not necessary if the package version is changing, and you will need to add the build number section to the `meta.yaml` file if it doesn't already exist.
 
 For example, if the current recipe has this in the `meta.yaml`:
 
