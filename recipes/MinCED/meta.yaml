@@ -7,7 +7,7 @@ source:
   git_rev: 0.2.0
 
 build:
-  number: 0
+  number: 1
 
 test:
   files:
