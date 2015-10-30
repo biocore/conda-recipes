@@ -32,6 +32,7 @@ def build_upload_recipes(p, channel):
         has_recipe = 'meta.yaml' in files
         if not dirs and has_recipe:
             with open(os.path.join(root, 'meta.yaml')) as f:
+                log.info("Checking {}".format(root))
                 meta = yaml.load(f)
                 name = meta['package']['name']
                 version = meta['package']['version']
@@ -91,8 +92,8 @@ def is_already_uploaded(name, version, build_number, channel):
 
     '''
     check_cmd = ('conda search --json --override-channels '
-                 '-c {0} --spec {1}={2}').format(
-                     channel, name, version)
+                 '-c {0} --spec {1}').format(
+                     channel, name)
     log.info('Checking: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
     res = json.loads(out)
