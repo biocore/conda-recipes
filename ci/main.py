@@ -40,7 +40,7 @@ def build_upload_recipes(p, channel):
                 except KeyError:
                     # Build number is 0 if not specified
                     build_number = 0
-                if is_already_uploaded(name, version, build_number):
+                if is_already_uploaded(name, version, build_number, channel):
                     # Only new packages (either version or build_number)
                     log.info("Skipping package: {0}-{1}".format(name, version))
                     continue
@@ -48,14 +48,20 @@ def build_upload_recipes(p, channel):
                 if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
                     upload(name, version, channel)
                 else:
-                    print("Uploading not available in Pull Requests")
+                    log.info("Uploading not available in Pull Requests")
 
 
 def build(name, version, root):
-    log.info("Building package: {0}-{1}".format(name, version))
+    '''Build a recipe.
+
+    Parameters
+    ----------
+    root : str
+        the directory path for the recipe.
+    '''
     # Quote is need in case the root path has spaces in it.
     build_cmd = 'conda build "%s"' % root
-    print('BUILDING COMMAND: {0}'.format(build_cmd))
+    log.info('Build: {0}'.format(build_cmd))
     check_call(build_cmd, shell=True)
 
 
@@ -79,20 +85,20 @@ def is_already_uploaded(name, version, build_number, channel):
     Returns
     -------
     Bool
-        If a previous package in the channel has the same name, the same
-        version, and an equal or higher build number, then return False;
-        otherwise, return True.
-    '''
+        If a package in the channel has the same name, the same
+        version, and an equal or higher build number, then return
+        True; otherwise, return False.
 
+    '''
     check_cmd = ('conda search --json --override-channels '
                  '-c {0} --spec {1}={2}').format(
-                     CHANNEL, name, version)
-    print('CHECKING COMMAND: {0}'.format(check_cmd))
+                     channel, name, version)
+    log.info('Check: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
     res = json.loads(out)
     return all((name in res,
                 res[name][0]['version'] == version,
-                res[name][0]['build_number'] == build_number))
+                res[name][0]['build_number'] >= build_number))
 
 
 def upload(name, version, channel):
@@ -107,17 +113,16 @@ def upload(name, version, channel):
     channel : str
         Channel where the package will be uploaded.
     '''
-
     built_glob = os.path.join(
         config.bldpkgs_dir,
         '{0}-{1}*.tar.bz2'.format(name, version))
     built = glob.glob(built_glob)[0]
     upload_cmd = 'anaconda -t {token} upload -u {channel} {built}'
     # Do not show decrypted token!
-    log.info('Upload: {0}'.format(cmd))
+    log.info('Upload: {0}'.format(upload_cmd))
     check_call(
         upload_cmd.format(
-            token=os.environ['ANACONDA_TOKEN'], 
+            token=os.environ['ANACONDA_TOKEN'],
             built=built,
             channel=channel),
         shell=True)
