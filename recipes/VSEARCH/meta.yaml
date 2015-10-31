@@ -9,6 +9,10 @@ source:
 requirements:
   build:
     - gcc
+
+build:
+  number: 1
+
  
 test:
   commands:
