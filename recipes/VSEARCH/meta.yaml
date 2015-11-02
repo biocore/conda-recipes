@@ -1,0 +1,25 @@
+package:
+  name: vsearch
+  version: "1.8.0"
+
+source:
+  git_rev: v1.8.0
+  git_url: https://github.com/torognes/vsearch.git
+ 
+requirements:
+  build:
+    - gcc
+
+build:
+  number: 1
+
+ 
+test:
+  commands:
+    - vsearch -h
+ 
+about:
+  summary: VSEARCH, a versatile open source tool for metagenomics
+  home: https://github.com/torognes/vsearch
+  license: GPL/BSD
+  license_file: LICENSE.txt
