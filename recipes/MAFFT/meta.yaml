@@ -12,7 +12,7 @@ test:
     - seqs_aligned_expected.fna
   commands:
     - mafft seqs.fna 1> seqs_aligned_mafft.fna 2> /dev/null
-    - diff -q seqs_aligned_mafft.fna seqs_aligned_expected > /dev/null
+    - diff -q seqs_aligned_mafft.fna seqs_aligned_expected.fna > /dev/null
 
 about:
   summary: Multiple alignment program for amino acid or nucleotide sequences
