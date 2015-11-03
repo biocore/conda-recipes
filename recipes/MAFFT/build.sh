@@ -1,5 +1,5 @@
 cd core/
-eval "sed -ie s/PREFIX = \/usr\/local/PREFIX/g = $PREFIX/" Makefile
+sed -i -e "s|PREFIX = /usr/local|PREFIX = $PREFIX|g" Makefile
 make clean
 make
 make install
