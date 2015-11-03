@@ -1,0 +1,21 @@
+package:
+  name: mafft
+  version: "7.245"
+
+source:
+  fn: mafft-7.245-with-extensions-src.tgz
+  url: http://mafft.cbrc.jp/alignment/software/mafft-7.245-with-extensions-src.tgz
+
+test:
+  files:
+    - seqs.fna
+    - seqs_aligned_expected.fna
+  commands:
+    - mafft seqs.fna 1> seqs_aligned_mafft.fna 2> /dev/null
+    - diff -q seqs_aligned_mafft.fna seqs_aligned_expected > /dev/null
+
+about:
+  summary: Multiple alignment program for amino acid or nucleotide sequences
+  home: http://mafft.cbrc.jp
+  license: BSD
+  license_file: license
