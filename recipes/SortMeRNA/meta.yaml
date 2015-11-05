@@ -6,16 +6,12 @@ source:
   fn: sortmerna-2.0-no-db.tar.gz
   url: ftp://ftp.microbio.me/pub/sortmerna-2.0-no-db.tar.gz
  
-requirements:
-  build:
-    - gcc
- 
 test:
   commands:
     - sortmerna -h
  
 about:
-  summary:SortMeRNA is a biological sequence analysis tool for filtering, mapping and OTU-picking NGS reads. 
+  summary: SortMeRNA is a biological sequence analysis tool for filtering, mapping and OTU-picking NGS reads. 
   home: http://bioinfo.lifl.fr/RNA/sortmerna/
   license: LGPL
   license_file: LICENSE.LESSER.txt
