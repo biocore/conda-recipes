@@ -16,5 +16,8 @@ bash $MINICONDA_FILE -b -p $HOME/miniconda
 
 export PATH=$HOME/miniconda/bin:$PATH
 hash -r
-conda update --yes conda
-conda install --yes pip conda-build anaconda-client
+conda config --set always_yes yes --set changeps1 no
+conda update -q conda
+conda install pip conda-build anaconda-client
+# Useful for debugging any issues with conda
+conda info -a
