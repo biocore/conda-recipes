@@ -17,6 +17,8 @@ Currently, the following packages (and their versions) are built and available o
 
 * [VSEARCH](https://github.com/torognes/vsearch): [![Binstar Badge](https://anaconda.org/biocore/vsearch/badges/version.svg)](https://anaconda.org/biocore/vsearch)
 
+* [MAFFT](http://mafft.cbrc.jp): [![Binstar Badge](https://anaconda.org/biocore/mafft/badges/version.svg)](https://anaconda.org/biocore/mafft)
+
 
 To install a package, you just need to run:
 
