@@ -15,6 +15,9 @@ Currently, the following packages (and their versions) are built and available o
 
 * [Prodigal](https://github.com/hyattpd/Prodigal): [![Binstar Badge](https://anaconda.org/biocore/prodigal/badges/version.svg)](https://anaconda.org/biocore/prodigal)
 
+* [VSEARCH](https://github.com/torognes/vsearch): [![Binstar Badge](https://anaconda.org/biocore/vsearch/badges/version.svg)](https://anaconda.org/biocore/vsearch)
+
+* [MAFFT](http://mafft.cbrc.jp): [![Binstar Badge](https://anaconda.org/biocore/mafft/badges/version.svg)](https://anaconda.org/biocore/mafft)
 
 
 To install a package, you just need to run:
@@ -31,6 +34,20 @@ How to create a recipe is documented on [conda's website](http://conda-test.pyda
 
 You can also borrow from the examples located in this repository: [recipes](https://github.com/biocore/conda-recipes/tree/master/recipes). There are also lots of examples in conda's conda-recipes [repository](https://github.com/conda/conda-recipes/).
 
+## Modify an existing conda recipe
+If you modified an existing recipe in this repository and would like to merge it back, you should increment the build number by one in order to trigger a package rebuild. This is not necessary if the package version is changing, and you will need to add the build number section to the `meta.yaml` file if it doesn't already exist.
+
+For example, if the current recipe has this in the `meta.yaml`:
+
+	build:
+	  number: 1
+
+you should change it to the following after you modify it:
+
+	build:
+	  number: 2
+
+If there is no such section in `meta.yaml`, the build number defaults to zero. You should set it to 1 after modifying it. Please see the documentation [here](http://conda.pydata.org/docs/building/meta-yaml.html#build-number-and-string)
 
 ## Build a conda package
 You need to install the following mandatory toolset before building a package.

@@ -3,61 +3,131 @@ import sys
 import json
 import yaml
 import glob
-from subprocess import check_call, check_output, CalledProcessError
+import logging
+from subprocess import check_call, check_output
 
 from conda_build.config import config
 
 
-CHANNEL = 'https://conda.anaconda.org/biocore'
+log = logging.getLogger(__name__)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(
+    logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
+handler.setLevel(logging.INFO)
+log.addHandler(handler)
+log.setLevel(logging.INFO)
 
 
-def build_upload_recipes(p):
+def build_upload_recipes(p, channel):
+    '''Build & upload recipes recursively in a directory.
+
+    Parameters
+    ----------
+    p : str
+        Path to the recipes.
+    channel : str
+        Anaconda channel where the packages will be uploaded.
+    '''
     for root, dirs, files in os.walk(p):
         has_recipe = 'meta.yaml' in files
         if not dirs and has_recipe:
             with open(os.path.join(root, 'meta.yaml')) as f:
-                pkg = yaml.load(f)['package']
-                name = pkg['name']
-                version = pkg['version']
-                build(name, version, root)
+                log.info("Checking {}".format(root))
+                meta = yaml.load(f)
+                name = meta['package']['name']
+                version = meta['package']['version']
+                try:
+                    build_number = meta['build']['number']
+                except KeyError:
+                    # Build number is 0 if not specified
+                    build_number = 0
+                if is_already_uploaded(name, version, build_number, channel):
+                    # Only new packages (either version or build_number)
+                    log.info("Skipping package: {0}-{1}".format(name, version))
+                    continue
+                build(root)
                 if os.environ['TRAVIS_SECURE_ENV_VARS'] == 'true':
-                    upload(name, version)
+                    upload(name, version, channel)
                 else:
-                    print("Uploading not available in Pull Requests")
+                    log.info("Uploading not available in Pull Requests")
 
 
-def build(name, version, root):
-    print("Building package: {0}-{1}".format(name, version))
+def build(root):
+    '''Build a recipe.
+
+    Parameters
+    ----------
+    root : str
+        the directory path for the recipe.
+    '''
     # Quote is need in case the root path has spaces in it.
     build_cmd = 'conda build "%s"' % root
-    print('BUILDING COMMAND: {0}'.format(build_cmd))
+    log.info('Building: {0}'.format(build_cmd))
     check_call(build_cmd, shell=True)
 
 
-def upload(name, version):
+def is_already_uploaded(name, version, build_number, channel):
+    '''Check if we want to build & upload a package.
+
+    It checks package name, version and build number
+    sequentially to decide whether to build and upload it or not.
+
+    Parameters
+    ----------
+    name : str
+        Package name.
+    version : str
+        Package version.
+    build_number : int
+        Build number
+    channel : str
+        Anaconda channel to check the previous build.
+
+    Returns
+    -------
+    Bool
+        If a package in the channel has the same name, the same
+        version, and an equal or higher build number, then return
+        True; otherwise, return False.
+
+    '''
     check_cmd = ('conda search --json --override-channels '
-                 '-c {0} --spec {1}={2}').format(
-                     CHANNEL, name, version)
-    print('CHECKING COMMAND: {0}'.format(check_cmd))
-    try:
-        out = check_output(check_cmd, shell=True)
-    except CalledProcessError as e:
-        # This built version does not exist in the channel
-        out = e.output
+                 '-c {0} --spec {1}').format(
+                     channel, name)
+    log.info('Checking: {0}'.format(check_cmd))
+    out = check_output(check_cmd, shell=True)
     res = json.loads(out)
-    if name not in res:
-        built_glob = os.path.join(
-            config.bldpkgs_dir,
-            '{0}-{1}*.tar.bz2'.format(name, version))
-        built = glob.glob(built_glob)[0]
-        upload_cmd = 'anaconda -t {token} upload -u biocore {built}'
-        # Do not show decrypted token!
-        print('UPLOADING COMMAND: {0}'.format(upload_cmd))
-        check_call(
-            upload_cmd.format(
-                token=os.environ['ANACONDA_TOKEN'], built=built),
-            shell=True)
+    return (name in res and
+            res[name][0]['version'] == version and
+            res[name][0]['build_number'] >= build_number)
+
+
+def upload(name, version, channel):
+    '''Upload a built package.
+
+    Parameters
+    ----------
+    name : str
+        Package name.
+    version : str
+        Package version.
+    channel : str
+        Channel where the package will be uploaded.
+    '''
+    built_glob = os.path.join(
+        config.bldpkgs_dir,
+        '{0}-{1}*.tar.bz2'.format(name, version))
+    built = glob.glob(built_glob)[0]
+    upload_cmd = 'anaconda -t {token} upload -u {channel} {built}'
+    # Do not show decrypted token!
+    log.info('Uploading: {0}'.format(upload_cmd))
+    check_call(
+        upload_cmd.format(
+            token=os.environ['ANACONDA_TOKEN'],
+            built=built,
+            channel=channel),
+        shell=True)
 
 
 if __name__ == '__main__':
-    build_upload_recipes(sys.argv[1])
+    build_upload_recipes(sys.argv[1], sys.argv[2])

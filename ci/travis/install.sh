@@ -12,9 +12,12 @@ esac
 MINICONDA_URL="http://repo.continuum.io/miniconda"
 MINICONDA_FILE="Miniconda-latest-${os}-x86_64.sh"
 wget "${MINICONDA_URL}/${MINICONDA_FILE}"
-bash $MINICONDA_FILE -b
+bash $MINICONDA_FILE -b -p $HOME/miniconda
 
 export PATH=$HOME/miniconda/bin:$PATH
-
-conda update --yes conda
-conda install --yes pip conda-build anaconda-client
+hash -r
+conda config --set always_yes yes --set changeps1 no
+conda update -q conda
+conda install pip conda-build anaconda-client
+# Useful for debugging any issues with conda
+conda info -a
