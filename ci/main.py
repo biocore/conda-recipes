@@ -97,9 +97,10 @@ def is_already_uploaded(name, version, build_number, channel):
     log.info('Checking: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
     res = json.loads(out)
+    build_number_remote = max(i['build_number'] for i in res['minced'])
     return (name in res and
             res[name][0]['version'] == version and
-            res[name][0]['build_number'] >= build_number)
+            build_number_remote >= build_number)
 
 
 def upload(name, version, channel):
