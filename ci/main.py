@@ -97,7 +97,7 @@ def is_not_uploaded(name, version, build_number, channel):
                      channel, name)
     log.info('Checking: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
-    res = json.loads(out)
+    res = json.loads(out.decode('utf-8'))
 
     if name not in res:
         return True

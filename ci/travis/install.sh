@@ -10,7 +10,7 @@ case "${TRAVIS_OS_NAME}" in
 esac
 
 MINICONDA_URL="http://repo.continuum.io/miniconda"
-MINICONDA_FILE="Miniconda-latest-${os}-x86_64.sh"
+MINICONDA_FILE="Miniconda3-latest-${os}-x86_64.sh"
 wget "${MINICONDA_URL}/${MINICONDA_FILE}"
 bash $MINICONDA_FILE -b -p $HOME/miniconda
 
