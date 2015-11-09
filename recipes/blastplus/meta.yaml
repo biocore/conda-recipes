@@ -1,13 +1,28 @@
 package:
   name: blast+
   version: "2.2.31"
- 
+
+# These are compiled binaries. The true source is 
+# ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-src.tar.gz 
+source:
+  fn: ncbi-blast-2.2.31+-x64-linux.tar.gz                                                                        # [linux64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-x64-linux.tar.gz            # [linux64]
+  md5: ae789a5bfb523cef95ac40e5a6b1929e                                                                          # [linux64]
+  fn: ncbi-blast-2.2.31+-universal-macosx.tar.gz                                                                 # [osx]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-universal-macosx.tar.gz     # [osx]
+  md5: 316555fef19749fe90455b7def03634e                                                                          # [osx]
+  fn: ncbi-blast-2.2.31+-x64-win64.tar.gz                                                                        # [win64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-x64-win64.tar.gz            # [win64]
+  md5: f80491198c16daa2d82ab3c95d00f244                                                                          # [win64]
+
+build:
+  number: 1
+
 test:
   commands:
-    - ./makeblastdb -help
- 
+    - makeblastdb -help
+
 about:
   summary: BLAST finds regions of similarity between biological sequences.
   home: http://blast.ncbi.nlm.nih.gov/
   license: Public Domain
-  license_file: LICENSE
