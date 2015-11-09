@@ -1,0 +1,25 @@
+package:
+  name: diamond
+  version: "0.7.9"
+
+source:
+  git_url: https://github.com/bbuchfink/diamond.git
+  git_rev: v0.7.9
+
+build:
+  number: 0
+  detect_binary_files_with_prefix: True
+
+requirements:
+  build:
+    - gcc
+
+test:
+  commands:
+    - diamond -h
+
+about:
+  summary: a BLAST-compatible local aligner for mapping protein and translated DNA query sequences against a protein reference database
+  home: http://github.com/bbuchfink/diamond
+  license: Copyright (c) 2014, University of Tuebingen
+  license_file: src/COPYING
