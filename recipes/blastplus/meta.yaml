@@ -1,0 +1,13 @@
+package:
+  name: blast+
+  version: "2.2.31"
+ 
+test:
+  commands:
+    - ./makeblastdb -help
+ 
+about:
+  summary: BLAST finds regions of similarity between biological sequences.
+  home: http://blast.ncbi.nlm.nih.gov/
+  license: Public Domain
+  license_file: LICENSE
