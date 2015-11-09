@@ -16,5 +16,5 @@ test:
 about:
   summary: a BLAST-compatible local aligner for mapping protein and translated DNA query sequences against a protein reference database
   home: http://github.com/bbuchfink/diamond
-  license: Copyright (c) 2014, University of Tuebingen
+  license: Modified BSD License
   license_file: src/COPYING

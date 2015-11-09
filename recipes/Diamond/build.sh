@@ -4,4 +4,5 @@ cd src
 ./install-boost &> /dev/null
 #sed -i "" "s/-march=native/ /g" Makefile
 make
-cp ../bin/diamond "$PREFIX/bin"
+mkdir -p $PREFIX/bin
+cp ../bin/diamond $PREFIX/bin

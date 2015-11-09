@@ -1,6 +1,10 @@
 os:
   - linux
   - osx
+addons:
+  apt:
+    packages:
+      - bc
 env:
   matrix:
     # CONDA_PY and CONDA_NPY are the env variable of python version
