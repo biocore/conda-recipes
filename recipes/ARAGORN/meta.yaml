@@ -1,0 +1,17 @@
+package:
+  name: aragorn
+  version: "1.2.36"
+
+source:
+  fn: aragorn1.2.36.tgz
+  url: http://mbio-serv2.mbioekol.lu.se/ARAGORN/Downloads/aragorn1.2.36.tgz
+
+test:
+  commands:
+    - aragorn -h
+
+about:
+  summary: ARAGORN detects tRNA, mtRNA, and tmRNA genes.
+  home: http://mbio-serv2.mbioekol.lu.se/ARAGORN
+  license: GPL2
+  license_file: aragorn1.2.36.c
