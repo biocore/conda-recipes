@@ -1,0 +1,26 @@
+package:
+  name: blast
+  version: "2.2.22"
+
+# These are compiled binaries. More are available at 
+# ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/ 
+source:
+  fn: blast-2.2.22-x64-linux.tar.gz                                                                       # [linux64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-x64-linux.tar.gz          # [linux64]
+  fn: blast-2.2.22-universal-macosx.tar.gz                                                                # [osx]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-universal-macosx.tar.gz   # [osx]
+  fn: blast-2.2.22-x64-win64.exe                                                                          # [win64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-x64-win64.exe             # [win64]
+
+build:
+  number: 0
+
+test:
+  commands:
+    - makeblastdb -help                # [osx or linux64]
+    - makeblastdb.exe -help            # [win64]
+
+about:
+  summary: BLAST finds regions of similarity between biological sequences.
+  home: http://blast.ncbi.nlm.nih.gov/
+  license: Public Domain
