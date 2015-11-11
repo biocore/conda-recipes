@@ -1,8 +1,9 @@
 #!/bin/bash
 
-cd src
-./install-boost &> /dev/null
-#sed -i "" "s/-march=native/ /g" Makefile
-make
-mkdir -p $PREFIX/bin
-cp ../bin/diamond $PREFIX/bin
+conda install boost
+
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=$PREFIX/bin ..
+make install
+
