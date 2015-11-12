@@ -1,6 +1,6 @@
 package:
   name: diamond
-  version: "0.7.9"
+  version: "0.7.9.dev0"
 
 source:
   git_url: https://github.com/bbuchfink/diamond.git
