@@ -1,5 +1,5 @@
 package:
-  name: blast+
+  name: blast-plus
   version: "2.2.31"
 
 # These are compiled binaries. The true source is 
