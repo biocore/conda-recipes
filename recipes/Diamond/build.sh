@@ -1,6 +1,6 @@
 #!/bin/bash
 
-conda install boost
+conda install -c menpo boost
 
 mkdir build
 cd build
@@ -8,13 +8,14 @@ cd build
 CMAKE_ARCH="-m"$ARCH
 INCLUDE_PATH=${PREFIX}/include
 LIBRARY_PATH=${PREFIX}/lib
+
 export LDFLAGS="-L${LIBRARY_PATH} $LDFLAGS"
 
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
-      -DBOOST_ROOT=$PREFIX \
-      -DBOOST_INCLUDEDIR="${INCLUDE_PATH}" \
-      -DBOOST_LIBRARYDIR="${LIBRARY_PATH}" \
-      ..
+cmake -LAH .. \
+-DCMAKE_PREFIX_PATH=$PREFIX \
+-DCMAKE_INSTALL_PREFIX=$PREFIX \
+-DBOOST_ROOT=$PREFIX \
+-DBOOST_INCLUDEDIR="${INCLUDE_PATH}" \
+-DBOOST_LIBRARYDIR="${LIBRARY_PATH}" \
 
-make install
-
+cmake --build . --config Release --target install
