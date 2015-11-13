@@ -1,7 +1,5 @@
 #!/bin/bash
 
-conda install -c menpo boost
-
 mkdir build
 cd build
 
