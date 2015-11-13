@@ -4,6 +4,8 @@ package:
 
 source:
   git_url: https://github.com/bbuchfink/diamond.git
+  patches:
+    - cmake_patch
 
 build:
   number: 0
@@ -11,6 +13,9 @@ build:
 requirements:
   build:
     - cmake
+    - boost
+  run:
+    - boost
 
 test:
   commands:
