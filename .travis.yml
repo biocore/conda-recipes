@@ -3,8 +3,11 @@ os:
   - osx
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
-      - bc
+      - gcc-4.8
+      - g++-4.8
 env:
   matrix:
     # CONDA_PY and CONDA_NPY are the env variable of python version
