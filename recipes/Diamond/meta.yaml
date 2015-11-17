@@ -1,0 +1,28 @@
+package:
+  name: diamond
+  version: "0.7.9.dev0"
+
+source:
+  git_url: https://github.com/bbuchfink/diamond.git
+  patches:
+    - cmake_patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake
+    - boost
+  run:
+    - boost
+
+test:
+  commands:
+    - diamond -h
+
+about:
+  summary: a BLAST-compatible local aligner for mapping protein and translated DNA query sequences against a protein reference database
+  home: http://github.com/bbuchfink/diamond
+  license: Modified BSD License
+  license_file: src/COPYING

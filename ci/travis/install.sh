@@ -21,3 +21,7 @@ conda update -q conda
 conda install pip conda-build anaconda-client
 # Useful for debugging any issues with conda
 conda info -a
+
+# Add channel to get boost libraries. Probably want to "self-host",
+# maybe embedding their recipes as a git module?
+conda config --add channels menpo
