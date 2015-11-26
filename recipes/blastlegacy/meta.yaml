@@ -1,0 +1,32 @@
+package:
+  name: blast-legacy
+  version: "2.2.22"
+
+# These are compiled binaries. More are available at 
+# ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/ 
+source:
+  fn: blast-2.2.22-x64-linux.tar.gz                                                                       # [linux64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-x64-linux.tar.gz          # [linux64]
+  fn: blast-2.2.22-universal-macosx.tar.gz                                                                # [osx]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-universal-macosx.tar.gz   # [osx]
+  fn: blast-2.2.22-x64-win64.exe                                                                          # [win64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/blast-2.2.22-x64-win64.exe             # [win64]
+
+build:
+  number: 0
+  script:
+    - mkdir -p "$PREFIX/bin"                                  # [osx or linux64]
+    - mv -v $SRC_DIR/bin/* $PREFIX/bin                        # [linux64]
+    # The next line is a workaround for conda/conda-build#411 which only affects OSX
+    - ditto --rsrc -v --arch i386 $SRC_DIR/bin/* $PREFIX/bin  # [osx]
+    - bash configure --prefix=%PREFIX%                        # [win64]
+    - xcopy /s "%SRC_DIR%\bin\*" "%PREFIX%\bin"               # [win64]
+
+test:
+  commands:
+    - which formatdb                                          # [osx or linux64]
+
+about:
+  summary: BLAST finds regions of similarity between biological sequences.
+  home: http://blast.ncbi.nlm.nih.gov/
+  license: Public Domain
