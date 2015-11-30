@@ -1,0 +1,49 @@
+package:
+  name: fasttree
+  version: "2.1.3"
+
+source:
+  fn: FastTree-2.1.3.c
+  url: http://www.microbesonline.org/fasttree/FastTree-2.1.3.c
+
+build:
+  number: 0
+  script:
+    - mkdir -p "$PREFIX/bin"                                  # [osx or linux]
+
+    # Build on all platforms
+    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree-2.1.3.c -lm
+    # Only build with OpenMP on Linux
+    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP -DOPENMP -fopenmp FastTree-2.1.3.c -lm # [linux]
+
+    - mv -v ./FastTree* $PREFIX/bin                           # [osx or linux]
+    - xcopy /s "FastTree.exe" "%PREFIX%\bin"                  # [win64]
+
+test:
+  files:
+    # From gg_13_8 from biocore/qiime-default-reference/. Made with subsample_fasta.py and filter_alignment.py
+    - 85_otus.pynast_subsample_0.01_pfiltered.fasta
+    - 85_otus.pynast_subsample_0.01_pfiltered.tre
+    
+    # From the unit test for make_phylogeny.py.
+    # https://github.com/biocore/qiime/blob/master/tests/test_make_phylogeny.py#L121
+    - aln_for_tree.fna
+    - aln_for_tree.tre
+    
+  commands:
+    - FastTree -nt 85_otus.pynast_subsample_0.01_pfiltered.fasta > 85_otus.pynast_subsample_0.01_pfiltered.out   # [osx or linux]
+    - FastTree -nt aln_for_tree.fna > aln_for_tree.out                                                           # [osx or linux]
+    - diff 85_otus.pynast_subsample_0.01_pfiltered.out 85_otus.pynast_subsample_0.01_pfiltered.tre               # [osx or linux]
+    - diff aln_for_tree.out aln_for_tree.tre                                                                     # [osx or linux]
+    
+    - FastTreeMP -help                                                                                           # [linux]
+    - FastTreeMP -nt 85_otus.pynast_subsample_0.01_pfiltered.fasta > 85_otus.pynast_subsample_0.01_pfiltered.MP  # [linux]
+    - FastTreeMP -nt aln_for_tree.fna > aln_for_tree.MP                                                          # [linux]
+    - diff aln_for_tree.MP aln_for_tree.tre                                                                      # [linux]
+    
+    - FastTree.exe                                            # [win64]
+
+about:
+  summary: FastTree -- inferring approximately-maximum-likelihood trees for large multiple sequence alignments.
+  home: http://www.microbesonline.org/fasttree/
+  license: GPLv2
