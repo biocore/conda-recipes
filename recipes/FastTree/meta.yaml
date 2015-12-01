@@ -40,8 +40,7 @@ test:
     - FastTreeMP -nt 85_otus.pynast_subsample_0.01_pfiltered.fasta > 85_otus.pynast_subsample_0.01_pfiltered.MP  # [linux]
     - FastTreeMP -nt aln_for_tree.fna > aln_for_tree.MP                                                          # [linux]
     - diff aln_for_tree.MP aln_for_tree.tre                                                                      # [linux]
-    - diff 85_otus.pynast_subsample_0.01_pfiltered.MP 85_otus.pynast_subsample_0.01_pfiltered.tre                # [linux]
-    
+
     - FastTree.exe                                            # [win64]
 
 about:
