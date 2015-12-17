@@ -22,7 +22,7 @@ Currently, the following packages (and their versions) are built and available o
 
 To install a package, you just need to run:
 
-	conda install -c https://anaconda.org/biocore <package-name>
+	conda install -c https://conda.anaconda.org/biocore <package-name>
 
 No endless headache of time-consuming compilation and missing dependecies any more!
 
