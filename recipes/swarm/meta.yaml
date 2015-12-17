@@ -1,10 +1,10 @@
 package:
   name: swarm
-  version: "2.1.5"
+  version: "2.1.6"
 
 source:
-  fn: v2.1.5.tar.gz
-  url: https://github.com/torognes/swarm/archive/v2.1.5.tar.gz
+  fn: v2.1.6.tar.gz
+  url: https://github.com/torognes/swarm/archive/v2.1.6.tar.gz
 
 build:
   number: 0
