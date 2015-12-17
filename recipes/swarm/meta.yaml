@@ -1,0 +1,28 @@
+package:
+  name: swarm
+  version: "2.1.6"
+
+source:
+  fn: v2.1.6.tar.gz
+  url: https://github.com/torognes/swarm/archive/v2.1.6.tar.gz
+
+build:
+  number: 0
+  script:
+    - cd src
+    - make
+    
+    - mkdir -p $PREFIX/bin
+    - cp swarm $PREFIX/bin
+     
+test:
+  files:
+    - amplicons.fasta
+  commands:
+    - swarm -f -z amplicons.fasta
+ 
+about:
+  summary: swarm, A robust and fast clustering method for amplicon-based studies
+  home: https://github.com/torognes/swarm
+  license: Affero GPL v3
+  license_file: LICENSE
