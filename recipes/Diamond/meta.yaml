@@ -1,21 +1,22 @@
 package:
   name: diamond
-  version: "0.7.9.dev0"
+  version: "0.7.10"
 
 source:
   git_url: https://github.com/bbuchfink/diamond.git
+  git_tag: v0.7.10
   patches:
     - cmake_patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - cmake
-    - boost
+    - boost >=1.53.0
   run:
-    - boost
+    - boost >=1.53.0
 
 test:
   commands:
