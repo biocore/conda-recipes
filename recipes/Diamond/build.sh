@@ -12,8 +12,6 @@ case "$(uname)" in
         export LDFLAGS="-L${LIBRARY_PATH} $LDFLAGS"
 
         cmake -LAH .. \
-              -DCMAKE_CXX_COMPILER=g++-4.8 \
-              -DCMAKE_C_COMPILER=gcc-4.8 \
               -DCMAKE_PREFIX_PATH=$PREFIX \
               -DCMAKE_INSTALL_PREFIX=$PREFIX \
               -DBOOST_ROOT=$PREFIX \
