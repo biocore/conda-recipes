@@ -1,21 +1,17 @@
 #!/bin/bash
 
-mkdir build
-cd build
-
-CMAKE_ARCH="-m"$ARCH
-INCLUDE_PATH=${PREFIX}/include
-LIBRARY_PATH=${PREFIX}/lib
-
-export LDFLAGS="-L${LIBRARY_PATH} $LDFLAGS"
-
-cmake -LAH .. \
--DCMAKE_CXX_COMPILER=g++-4.8 \
--DCMAKE_C_COMPILER=gcc-4.8 \
--DCMAKE_PREFIX_PATH=$PREFIX \
--DCMAKE_INSTALL_PREFIX=$PREFIX \
--DBOOST_ROOT=$PREFIX \
--DBOOST_INCLUDEDIR="${INCLUDE_PATH}" \
--DBOOST_LIBRARYDIR="${LIBRARY_PATH}" \
-
-cmake --build . --config Release --target install
+case "$(uname)" in
+    Linux)
+        wget http://github.com/bbuchfink/diamond/releases/download/v0.7.10/diamond-linux64.tar.gz
+        tar xzf diamond-linux64.tar.gz
+        mv diamond $PREFIX/bin
+        ;;
+    Darwin)
+        cd src
+        ./install-boost &> /dev/null
+        #sed -i "" "s/-march=native/ /g" Makefile
+        make
+        mkdir -p $PREFIX/bin
+        cp ../bin/diamond $PREFIX/bin
+        ;;
+esac
