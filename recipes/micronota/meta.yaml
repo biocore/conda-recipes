@@ -1,0 +1,49 @@
+package:
+  name: micronota
+  version: !!str a016615
+
+source:
+  git_url: https://github.com/biocore/micronota.git
+
+build:
+  #preserve_egg_dir: True
+  entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.
+    - micronota = micronota.cli:cmd
+
+requirements:
+  build:
+    - python
+    - scikit-bio
+    - prodigal
+    - diamond
+    - infernal
+    - hmmer
+    - minced
+    - aragorn
+
+  run:
+    - python
+    - scikit-bio
+    - prodigal
+    - diamond
+    - infernal
+    - hmmer
+    - minced
+    - aragorn
+
+test:
+  # Python imports
+  imports:
+    - micronota
+
+  commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+    - micronota --help
+
+about:
+  home: https://github.com/biocore/micronota
+  license: Modified BSD License
+  summary: (meta)genomic annotation tool
