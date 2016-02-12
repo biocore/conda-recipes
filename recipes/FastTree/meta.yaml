@@ -1,10 +1,10 @@
 package:
   name: fasttree
-  version: "2.1.3"
+  version: "2.1.8"
 
 source:
-  fn: FastTree-2.1.3.c
-  url: http://www.microbesonline.org/fasttree/FastTree-2.1.3.c
+  fn: FastTree-2.1.8.c
+  url: http://www.microbesonline.org/fasttree/FastTree-2.1.8.c
 
 build:
   number: 0
@@ -12,9 +12,9 @@ build:
     - mkdir -p "$PREFIX/bin"                                  # [osx or linux]
 
     # Build on all platforms
-    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree-2.1.3.c -lm
+    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree-2.1.8.c -lm
     # Only build with OpenMP on Linux
-    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP -DOPENMP -fopenmp FastTree-2.1.3.c -lm # [linux]
+    - gcc -DUSE_DOUBLE -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP -DOPENMP -fopenmp FastTree-2.1.8.c -lm # [linux]
 
     - mv -v ./FastTree* $PREFIX/bin                           # [osx or linux]
     - xcopy /s "FastTree.exe" "%PREFIX%\bin"                  # [win64]
@@ -40,7 +40,7 @@ test:
     - FastTreeMP -nt 85_otus.pynast_subsample_0.01_pfiltered.fasta > 85_otus.pynast_subsample_0.01_pfiltered.MP  # [linux]
     - FastTreeMP -nt aln_for_tree.fna > aln_for_tree.MP                                                          # [linux]
     - diff aln_for_tree.MP aln_for_tree.tre                                                                      # [linux]
-    
+
     - FastTree.exe                                            # [win64]
 
 about:
