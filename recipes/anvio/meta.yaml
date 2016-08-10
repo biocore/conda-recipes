@@ -1,0 +1,49 @@
+package:
+  name: anvio
+  version: "v2.0.2"
+
+source:
+  git_url: https://github.com/meren/anvio.git --recursive
+
+requirements:
+  build:
+    - python >=2.7
+    - cython
+    - prodigal
+    - hmmer
+    - bottle>=0.12.9
+    - pysam==0.9.1
+    - ete2>=2.3.10
+    - scipy>=0.13.3
+    - scikit-learn>=0.17.1
+    - django>=1.9.7
+    - h5py>=2.6.0
+    - cherrypy>=6.0.2 
+    - requests>=2.10.0
+    - numpy >=1.9.2
+    - gsl
+
+  run:
+    - python >=2.7
+    - cython
+    - prodigal
+    - hmmer
+    - bottle>=0.12.9
+    - pysam==0.9.1
+    - ete2>=2.3.10
+    - scipy>=0.13.3
+    - scikit-learn>=0.17.1
+    - django>=1.9.7
+    - h5py>=2.6.0
+    - cherrypy>=6.0.2 
+    - requests>=2.10.0
+    - numpy >=1.9.2
+    - gsl
+
+test:
+  imports:
+    - anvio
+
+about:
+  home: https://github.com/meren/anvio
+  license: GPLv3 license
