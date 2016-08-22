@@ -1,0 +1,33 @@
+package:
+  name: deblur
+  version: "0.0.1"
+
+source:
+  git_url: https://github.com/biocore/deblur.git
+    
+requirements:
+  build:
+    - python <3
+    - setuptools
+    - vsearch
+    - mafft
+    - sortmerna ==2.0
+    - hdf5
+    - h5py
+
+  run:
+    - python <3
+    - setuptools
+    - vsearch
+    - mafft
+    - sortmerna ==2.0
+    - hdf5
+    - h5py
+
+test:
+  imports:
+    - deblur
+
+about:
+  home: https://github.com/biocore/deblur
+  license: BSD license
