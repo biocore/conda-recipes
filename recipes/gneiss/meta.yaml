@@ -14,7 +14,7 @@ requirements:
     - scipy
     - numpy
     - matplotlib
-    - pyqt
+    - pyqt <=4.11.3
   run:
     - python
     - scikit-bio ==0.4.2
@@ -22,7 +22,7 @@ requirements:
     - scipy
     - numpy
     - matplotlib
-    - pyqt
+    - pyqt <=4.11.3
 test:
   # Python imports
   imports:
