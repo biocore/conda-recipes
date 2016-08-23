@@ -1,0 +1,33 @@
+package:
+  name: gneiss
+  version: 0.1.0
+
+source:
+  git_url: https://github.com/biocore/gneiss.git
+
+
+requirements:
+  build:
+    - python
+    - scikit-bio ==0.4.2
+    - pandas
+    - scipy
+    - numpy
+    - matplotlib
+  run:
+    - python
+    - scikit-bio ==0.4.2
+    - pandas
+    - scipy
+    - numpy
+    - matplotlib
+
+test:
+  # Python imports
+  imports:
+    - gneiss
+
+about:
+  home: https://github.com/biocore/gneiss
+  license: GPLv3 License
+  summary: Compositional Analysis and Visualization toolkit
