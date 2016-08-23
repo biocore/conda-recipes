@@ -7,21 +7,19 @@ source:
     
 requirements:
   build:
-    - python <3
+    - python
     - setuptools
     - vsearch
     - mafft
     - sortmerna ==2.0
-    - hdf5
     - h5py
 
   run:
-    - python <3
+    - python
     - setuptools
     - vsearch
     - mafft
     - sortmerna ==2.0
-    - hdf5
     - h5py
 
 test:
