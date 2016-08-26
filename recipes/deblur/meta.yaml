@@ -8,7 +8,8 @@ source:
 requirements:
   build:
     - python
-    - setuptools
+    - scikit-bio
+    - biom-format
     - vsearch
     - mafft
     - sortmerna ==2.0
@@ -16,7 +17,8 @@ requirements:
 
   run:
     - python
-    - setuptools
+    - scikit-bio
+    - biom-format
     - vsearch
     - mafft
     - sortmerna ==2.0
