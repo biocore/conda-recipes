@@ -9,20 +9,21 @@ source:
 requirements:
   build:
     - python
-    - scikit-bio ==0.4.2
     - pandas
     - scipy
     - numpy
     - matplotlib
-    - pyqt <=4.11.3
+    - scikit-bio ==0.5.1
+    - pyqt ==4.11.4
   run:
     - python
-    - scikit-bio ==0.4.2
     - pandas
     - scipy
     - numpy
     - matplotlib
-    - pyqt <=4.11.3
+    - scikit-bio ==0.5.1
+    - pyqt ==4.11.4
+
 test:
   # Python imports
   imports:
