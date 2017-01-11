@@ -1,12 +1,13 @@
 package:
   name: deblur
-  version: "0.0.1"
+  version: "0.1.8"
 
 source:
   git_url: https://github.com/biocore/deblur.git
     
 requirements:
   build:
+    - setuptools
     - python
     - scikit-bio
     - biom-format
@@ -14,8 +15,11 @@ requirements:
     - mafft
     - sortmerna ==2.0
     - h5py
+    - click
+    - pip
 
   run:
+    - setuptools
     - python
     - scikit-bio
     - biom-format
@@ -23,6 +27,8 @@ requirements:
     - mafft
     - sortmerna ==2.0
     - h5py
+    - click
+    - pip
 
 test:
   imports:
