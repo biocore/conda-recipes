@@ -10,7 +10,6 @@ requirements:
     - setuptools
     - python
     - scikit-bio
-    - biom-format
     - vsearch
     - mafft
     - sortmerna ==2.0
@@ -22,7 +21,6 @@ requirements:
     - setuptools
     - python
     - scikit-bio
-    - biom-format
     - vsearch
     - mafft
     - sortmerna ==2.0
