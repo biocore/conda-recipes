@@ -9,6 +9,8 @@ from subprocess import check_call, check_output
 from conda_build.config import Config
 
 
+config = Config()
+
 log = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(
@@ -123,7 +125,7 @@ def upload(name, version, channel):
         Channel where the package will be uploaded.
     '''
     built_glob = os.path.join(
-        Config.bldpkgs_dir,
+        config.bldpkgs_dir,
         '{0}-{1}*.tar.bz2'.format(name, version))
     built = glob.glob(built_glob)[0]
     upload_cmd = 'anaconda -t {token} upload -u %s %s' % (channel, built)
