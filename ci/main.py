@@ -6,8 +6,10 @@ import glob
 import logging
 from subprocess import check_call, check_output
 
-from conda_build.config import config
+from conda_build.config import Config
 
+
+config = Config()
 
 log = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
@@ -93,7 +95,7 @@ def is_not_uploaded(name, version, build_number, channel):
 
     '''
     check_cmd = ('conda search --json --override-channels '
-                 '-c {0} --spec {1}').format(
+                 '-c {0} {1}').format(
                      channel, name)
     log.info('Checking: {0}'.format(check_cmd))
     out = check_output(check_cmd, shell=True)
