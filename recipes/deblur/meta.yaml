@@ -14,8 +14,8 @@ requirements:
     - setuptools
     - python
     - scikit-bio
-    - vsearch
-    - mafft
+    - vsearch ==2.0.3
+    - mafft ==7.221
     - sortmerna ==2.0
     - h5py
     - click
