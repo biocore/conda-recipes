@@ -8,9 +8,11 @@ source:
 
 build:
   number: 3
-  
+
 requirements:
   build:
+    - biom-format
+    - future
     - setuptools
     - python
     - scikit-bio
@@ -22,6 +24,8 @@ requirements:
     - pip
 
   run:
+    - biom-format
+    - future
     - setuptools
     - python
     - scikit-bio
@@ -35,7 +39,8 @@ requirements:
 test:
   imports:
     - deblur
-
+  commands:
+    - deblur --help
 about:
   home: https://github.com/biocore/deblur
   license: BSD license
