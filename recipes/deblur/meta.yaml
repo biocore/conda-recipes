@@ -14,27 +14,25 @@ requirements:
     - biom-format
     - future
     - setuptools
-    - python
-    - scikit-bio
+    - python >=3.5
+    - scikit-bio >=0.5.0
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
     - h5py
     - click
-    - pip
 
   run:
     - biom-format
     - future
     - setuptools
-    - python
-    - scikit-bio
+    - python >=3.5
+    - scikit-bio >=0.5.0
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
     - h5py
     - click
-    - pip
 
 test:
   imports:
