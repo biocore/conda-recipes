@@ -1,21 +1,21 @@
 package:
   name: deblur
-  version: "0.1.8"
+  version: "1.0.0"
 
 source:
   git_url: https://github.com/biocore/deblur.git
-  git_rev: 0.1.8
+  git_rev: 1.0.0
 
 build:
-  number: 2
+  number: 3
   
 requirements:
   build:
     - setuptools
     - python
     - scikit-bio
-    - vsearch
-    - mafft
+    - vsearch ==2.0.3
+    - mafft ==7.221
     - sortmerna ==2.0
     - h5py
     - click
@@ -25,8 +25,8 @@ requirements:
     - setuptools
     - python
     - scikit-bio
-    - vsearch
-    - mafft
+    - vsearch ==2.0.3
+    - mafft ==7.221
     - sortmerna ==2.0
     - h5py
     - click
