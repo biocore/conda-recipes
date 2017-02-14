@@ -21,7 +21,7 @@ build:
 
     - biom=biom.cli:cli
 
-  number: 1
+  number: 7
 
 requirements:
   build:
