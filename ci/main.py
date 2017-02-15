@@ -4,7 +4,7 @@ import json
 import yaml
 import glob
 import logging
-from subprocess import check_call, check_output
+from subprocess import run, PIPE
 
 from conda_build.config import Config
 
@@ -64,9 +64,10 @@ def build(root):
         the directory path for the recipe.
     '''
     # Quote is need in case the root path has spaces in it.
-    build_cmd = 'conda build "%s"' % root
+    build_cmd = 'conda build --dirty "%s"' % root
     log.info('Building: {0}'.format(build_cmd))
-    check_call(build_cmd, shell=True)
+    proc = run(build_cmd, shell=True)
+    log.info(proc)
 
 
 def is_not_uploaded(name, version, build_number, channel):
@@ -98,8 +99,9 @@ def is_not_uploaded(name, version, build_number, channel):
                  '-c {0} {1}').format(
                      channel, name)
     log.info('Checking: {0}'.format(check_cmd))
-    out = check_output(check_cmd, shell=True)
-    res = json.loads(out.decode('utf-8'))
+    proc = run(check_cmd, shell=True, stdout=PIPE)
+    log.info(proc)
+    res = json.loads(proc.stdout.decode('utf-8'))
 
     if name not in res:
         return True
@@ -131,9 +133,10 @@ def upload(name, version, channel):
     upload_cmd = 'anaconda -t {token} upload -u %s %s' % (channel, built)
     # Do not show decrypted token!
     log.info('Uploading: {0}'.format(upload_cmd))
-    check_call(
+    proc = run(
         upload_cmd.format(token=os.environ['ANACONDA_TOKEN']),
         shell=True)
+    log.info(proc)
 
 
 if __name__ == '__main__':
