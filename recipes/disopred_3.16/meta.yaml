@@ -1,0 +1,36 @@
+package:
+  name: disopred
+  version: "3.16"
+
+source:
+  url: http://bioinfadmin.cs.ucl.ac.uk/downloads/DISOPRED/DISOPRED3.16.tar.gz
+  md5: e5ff8c031f06c69dfed214636c6e1b64
+  patches:
+    - addcmdarguments.patch # add abilty to re-use pre-computed PSI-BLAST results and adding some cmd line arguments
+
+build:
+  number: 0
+
+test:
+  files:
+    - swissprot-rat.fasta.gz
+    - test_input.fasta
+    - test_input.mtx
+    - test_input.result
+  requires:
+    - blast-legacy ==2.2.22
+  commands:
+    - gunzip -f swissprot-rat.fasta.gz
+    - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
+    - run_disopred.pl -d swissprot-rat.fasta test_input.fasta
+    - diff test_input.diso test_input.result
+    - run_disopred.pl -d swissprot-rat.fasta -mtx 1 test_input.mtx
+    - diff test_input.diso test_input.result
+
+requirements:
+  run:
+    - blast-legacy ==2.2.22
+
+about:
+  summary: Protein intrinsic disorder prediction
+  home: http://bioinf.cs.ucl.ac.uk/software_downloads/
