@@ -32,5 +32,5 @@ requirements:
     - blast-legacy ==2.2.22
 
 about:
-  home: http://bioinf.cs.ucl.ac.uk/software_downloads/
   summary: SVM Transmembrane protein structure prediction
+  home: http://bioinf.cs.ucl.ac.uk/software_downloads/
