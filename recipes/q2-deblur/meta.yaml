@@ -46,7 +46,7 @@ test:
   imports:
     - q2_deblur
   commands:
-    - qiime deblur denoise_16S --help
+    - qiime deblur denoise-16S --help
 
 about:
   home: https://github.com/biocore/deblur
