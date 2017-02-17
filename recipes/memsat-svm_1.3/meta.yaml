@@ -16,7 +16,7 @@ test:
     - test_input.mtx
     - test_result.out
   requires:
-    - blast ==2.2.26
+    - blastlegacy ==2.2.22
   commands:
     - gunzip -f swissprot-rat.fasta.gz
     - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
@@ -29,7 +29,7 @@ test:
 
 requirements:
   run:
-    - blast ==2.2.26
+    - blastlegacy ==2.2.22
 
 about:
   home: http://bioinf.cs.ucl.ac.uk/software_downloads/

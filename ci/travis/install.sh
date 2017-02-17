@@ -20,7 +20,6 @@ conda config --set always_yes yes --set changeps1 no
 conda config --add channels https://conda.anaconda.org/bioconda
 conda config --add channels https://conda.anaconda.org/biocore
 conda config --add channels https://conda.anaconda.org/qiime2
-conda config --add channels https://anaconda.org/hcc/
 conda update -q conda
 conda install pip conda-build anaconda-client
 # Useful for debugging any issues with conda
