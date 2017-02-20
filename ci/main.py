@@ -66,7 +66,7 @@ def build(root):
     # Quote is need in case the root path has spaces in it.
     build_cmd = 'conda build --dirty "%s"' % root
     log.info('Building: {0}'.format(build_cmd))
-    proc = run(build_cmd, shell=True)
+    proc = run(build_cmd, shell=True, check=True)
     log.info(proc)
 
 
@@ -99,7 +99,7 @@ def is_not_uploaded(name, version, build_number, channel):
                  '-c {0} {1}').format(
                      channel, name)
     log.info('Checking: {0}'.format(check_cmd))
-    proc = run(check_cmd, shell=True, stdout=PIPE)
+    proc = run(check_cmd, shell=True, stdout=PIPE, check=True)
     log.info(proc)
     res = json.loads(proc.stdout.decode('utf-8'))
 
@@ -135,7 +135,8 @@ def upload(name, version, channel):
     log.info('Uploading: {0}'.format(upload_cmd))
     proc = run(
         upload_cmd.format(token=os.environ['ANACONDA_TOKEN']),
-        shell=True)
+        shell=True,
+        check=True)
     log.info(proc)
 
 
