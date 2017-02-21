@@ -1,0 +1,19 @@
+package:
+  name: psipred
+  version: "4.01"
+
+source:
+  url: http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/psipred.4.01.tar.gz
+  md5: 9b66818f2a46ad6b4ac30756fdf5436d
+  path: ./runpsipred.pl
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - blast-legacy ==2.2.22
+
+about:
+  summary: Accurate protein secondary structure prediction
+  home: http://bioinf.cs.ucl.ac.uk/software_downloads/
