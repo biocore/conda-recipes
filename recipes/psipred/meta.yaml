@@ -5,10 +5,28 @@ package:
 source:
   url: http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/psipred.4.01.tar.gz
   md5: 9b66818f2a46ad6b4ac30756fdf5436d
-  path: ./runpsipred.pl
-
+  patches:
+    - perlwrapper.patch # provide a Perl wrapper for psipred
+    
 build:
   number: 0
+
+test:
+  files:
+    - swissprot-rat.fasta.gz
+    - test_input.fasta
+    - test_input.mtx
+    - test_result.out
+  requires:
+    - blast-legacy ==2.2.22
+  commands:
+    - gunzip -f swissprot-rat.fasta.gz
+    - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
+    - runpsipred.pl -mtx 0 -d swissprot-rat.fasta test_input.fasta
+    - diff psitmp*/test_input.fasta.horiz test_result.out
+    - rm -rf psitmp*
+    - runpsipred.pl -mtx 1 test_input.mtx
+    - diff psitmp*/test_input.mtx.horiz test_result.out
 
 requirements:
   run:

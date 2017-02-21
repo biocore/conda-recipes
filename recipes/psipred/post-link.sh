@@ -1,0 +1,1 @@
+echo "Run psipred through executing the script 'runpsipred.pl'." > $PREFIX/.messages.txt
