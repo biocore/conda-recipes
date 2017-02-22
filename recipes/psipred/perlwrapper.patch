@@ -1,5 +1,5 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-21 17:13:21.035021924 -0800
++++ runpsipred.stefan	2017-02-21 17:18:36.461790847 -0800
 @@ -0,0 +1,178 @@
 +#!/usr/bin/perl
 +
@@ -147,7 +147,7 @@
 +			$ENV{'BLASTMAT'} = $dir.'/data/';
 +			print Dumper 'dir', $dir;
 +		}
-+		print Dumper $ENV{'BLASTMAT'}, print Dumper qx(which blastpgp), $dir;
++		print Dumper $ENV{'BLASTMAT'}, print Dumper qx(which blastpgp);
 +		
 +		if ((not defined $dbname) or ($dbname eq '')) {
 +			print STDERR "Please provide a PSI-BLAST database name via -d!\n";
