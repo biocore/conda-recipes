@@ -13,7 +13,7 @@ source:
   url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-x64-win64.exe                # [win64]
 
 build:
-  number: 0
+  number: 2
   script:
     - mkdir -p "$PREFIX/bin" "$PREFIX/share/blast-2.2.26/data/"                                             # [osx or linux64]
     - mv -v $SRC_DIR/bin/* $PREFIX/bin                                                                      # [linux64]
