@@ -1,6 +1,6 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-21 16:00:13.868986221 -0800
-@@ -0,0 +1,177 @@
++++ runpsipred.stefan	2017-02-21 17:13:21.035021924 -0800
+@@ -0,0 +1,178 @@
 +#!/usr/bin/perl
 +
 +# This is a wrapper script to run PSIPRED
@@ -145,6 +145,7 @@
 +		if (not exists $ENV{'BLASTMAT'}) {
 +			my ($dir) = (qx(which blastpgp) =~ m|^(.*?)bin/blastpgp$|);
 +			$ENV{'BLASTMAT'} = $dir.'/data/';
++			print Dumper 'dir', $dir;
 +		}
 +		print Dumper $ENV{'BLASTMAT'}, print Dumper qx(which blastpgp), $dir;
 +		
