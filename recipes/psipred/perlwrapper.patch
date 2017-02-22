@@ -1,5 +1,5 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-21 17:18:36.461790847 -0800
++++ runpsipred.stefan	2017-02-22 08:17:43.827943782 -0800
 @@ -0,0 +1,178 @@
 +#!/usr/bin/perl
 +
@@ -83,7 +83,10 @@
 +sub blast {
 +	print "Running PSI-BLAST with sequence $inputfile ...\n";
 +		
-+	my $cmd = $ncbidir.'blastpgp -b 0 -v 5000 -j 3 -h 0.001 -d '.$dbname.' -i '.$tmproot.'/input -C '.$tmproot.'/psiblast.chk &> '.$tmproot.'/psiblast.blast';
++	my $blastdatadir = "";
++	$blastdatadir = $ENV{'BLASTMAT'} if (exists $ENV{'BLASTMAT'});
++	my $cmd = 'export BLASTMAT="'.$blastdatadir.'" && '.$ncbidir.'blastpgp -b 0 -v 5000 -j 3 -h 0.001 -d '.$dbname.' -i '.$tmproot.'/input -C '.$tmproot.'/psiblast.chk &> '.$tmproot.'/psiblast.blast';
++	print Dumper "CMD", $cmd, qx(echo $BLASTMAT);
 +	qx($cmd);
 +	my $status = $?;
 +	if ($status != 0) {
@@ -141,13 +144,10 @@
 +	# check if blast database is present
 +	if ($mtx != 1) {
 +		# guess blast data dir
-+		print Dumper $ENV, $ENV{'BLASTMAT'};
 +		if (not exists $ENV{'BLASTMAT'}) {
 +			my ($dir) = (qx(which blastpgp) =~ m|^(.*?)bin/blastpgp$|);
 +			$ENV{'BLASTMAT'} = $dir.'/data/';
-+			print Dumper 'dir', $dir;
 +		}
-+		print Dumper $ENV{'BLASTMAT'}, print Dumper qx(which blastpgp);
 +		
 +		if ((not defined $dbname) or ($dbname eq '')) {
 +			print STDERR "Please provide a PSI-BLAST database name via -d!\n";
