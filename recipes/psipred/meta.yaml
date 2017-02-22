@@ -18,7 +18,7 @@ test:
     - test_input.mtx
     - test_result.out
   requires:
-    - blast-legacy ==2.2.22
+    - blast-legacy ==2.2.26
   commands:
     - gunzip -f swissprot-rat.fasta.gz
     - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
@@ -30,7 +30,7 @@ test:
 
 requirements:
   run:
-    - blast-legacy ==2.2.22
+    - blast-legacy ==2.2.26
 
 about:
   summary: Accurate protein secondary structure prediction
