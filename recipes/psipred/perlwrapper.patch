@@ -1,6 +1,6 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-21 15:38:50.813303552 -0800
-@@ -0,0 +1,175 @@
++++ runpsipred.stefan	2017-02-21 16:00:13.868986221 -0800
+@@ -0,0 +1,177 @@
 +#!/usr/bin/perl
 +
 +# This is a wrapper script to run PSIPRED
@@ -138,14 +138,16 @@
 +		exit 1;	
 +	}
 +	
-+	# guess blast data dir
-+	if (not exists $ENV{'BLASTMAT'}) {
-+		my ($dir) = (qx(which blastpgp) =~ m|^(.*?)bin/blastpgp$|);
-+		$ENV{'BLASTMAT'} = $dir.'/data/';
-+	}
-+	
 +	# check if blast database is present
 +	if ($mtx != 1) {
++		# guess blast data dir
++		print Dumper $ENV, $ENV{'BLASTMAT'};
++		if (not exists $ENV{'BLASTMAT'}) {
++			my ($dir) = (qx(which blastpgp) =~ m|^(.*?)bin/blastpgp$|);
++			$ENV{'BLASTMAT'} = $dir.'/data/';
++		}
++		print Dumper $ENV{'BLASTMAT'}, print Dumper qx(which blastpgp), $dir;
++		
 +		if ((not defined $dbname) or ($dbname eq '')) {
 +			print STDERR "Please provide a PSI-BLAST database name via -d!\n";
 +			exit 1;
