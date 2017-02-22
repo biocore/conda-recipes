@@ -1,5 +1,5 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-22 08:17:43.827943782 -0800
++++ runpsipred.stefan	2017-02-22 08:25:32.890055876 -0800
 @@ -0,0 +1,178 @@
 +#!/usr/bin/perl
 +
@@ -86,7 +86,7 @@
 +	my $blastdatadir = "";
 +	$blastdatadir = $ENV{'BLASTMAT'} if (exists $ENV{'BLASTMAT'});
 +	my $cmd = 'export BLASTMAT="'.$blastdatadir.'" && '.$ncbidir.'blastpgp -b 0 -v 5000 -j 3 -h 0.001 -d '.$dbname.' -i '.$tmproot.'/input -C '.$tmproot.'/psiblast.chk &> '.$tmproot.'/psiblast.blast';
-+	print Dumper "CMD", $cmd, qx(echo $BLASTMAT);
++	print Dumper "CMD", $cmd, qx(echo \$BLASTMAT);
 +	qx($cmd);
 +	my $status = $?;
 +	if ($status != 0) {
