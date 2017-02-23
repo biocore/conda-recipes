@@ -24,7 +24,7 @@
 +&get_arguments();
 +
 +# Generate a "unique" temporary filename root
-+my $hostid = qx(hostid); chomp $hostid;
++my $hostid = qx(uname -n); chomp $hostid;
 +my $tmproot = ($ENV{TMPDIR} ? exists $ENV{TMPDIR} : '').'psitmp'.$$.$hostid;
 +qx(mkdir -p $tmproot && cp -f $inputfile $tmproot/input); #($? != 0)
 +
