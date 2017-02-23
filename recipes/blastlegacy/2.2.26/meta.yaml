@@ -1,0 +1,50 @@
+package:
+  name: blast-legacy
+  version: "2.2.26"
+
+# These are compiled binaries. More are available at 
+# ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release/2.2.22/ 
+source:
+  fn: blast-2.2.26-x64-linux.tar.gz                                                                         # [linux64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-x64-linux.tar.gz             # [linux64]
+  fn: blast-2.2.26-universal-macosx.tar.gz                                                                  # [osx]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-universal-macosx.tar.gz      # [osx]
+  fn: blast-2.2.26-x64-win64.exe                                                                            # [win64]
+  url: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy/2.2.26/blast-2.2.26-x64-win64.exe                # [win64]
+
+build:
+  number: 2
+  script:
+    - mkdir -p "$PREFIX/bin" "$PREFIX/share/blast-2.2.26/data/"                                             # [osx or linux64]
+    - mv -v $SRC_DIR/bin/* $PREFIX/bin                                                                      # [linux64]
+    - mv -v $SRC_DIR/data/* $PREFIX/share/blast-2.2.26/data/                                                # [linux64]
+    # The next line is a workaround for conda/conda-build#411 which only affects OSX     
+    - ditto --rsrc -v --arch i386 $SRC_DIR/bin/* $PREFIX/bin                                                # [osx]
+    - ditto --rsrc -v --arch i386 $SRC_DIR/data/* $PREFIX/share/blast-2.2.26/data                           # [osx]
+    - bash configure --prefix=%PREFIX%                                                                      # [win64]
+    - xcopy /s "%SRC_DIR%\bin\*" "%PREFIX%\bin"                                                             # [win64]
+    - xcopy /s "%SRC_DIR%\data\*" "%PREFIX%\share\blast-2.2.26\data"                                        # [win64]
+    # make sure that BLASTMAT environment variable is correctly set when activating environment     
+    - mkdir -p $PREFIX/etc/conda/activate.d/                                                                # [osx or linux64]
+    - echo "export BLASTMAT=$PREFIX/share/blast-2.2.26/data/" > $PREFIX/etc/conda/activate.d/setblastmat.sh # [osx or linux64]
+    - mkdir -p $PREFIX/etc/conda/deactivate.d/                                                              # [osx or linux64]
+    - echo "unset BLASTMAT" > $PREFIX/etc/conda/deactivate.d/setblastmat.sh                                 # [osx or linux64]
+
+test:
+  files:
+    - swissprot-rat.fasta.gz
+    - test_input.fasta
+    - test_input.mtx
+  commands:
+    - gunzip -c swissprot-rat.fasta.gz > swissprot-rat.fasta                                                # [osx or linux64]
+    - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta                                           # [osx or linux64]
+    - blastpgp -b 0 -v 5000 -j 3 -h 0.001 -d swissprot-rat.fasta -i test_input.fasta -C new.chk &> new.mtx  # [osx or linux64]
+    - echo 'new.chk' > new.pn                                                                               # [osx or linux64]
+    - echo 'test_input.fasta' > new.sn                                                                      # [osx or linux64]
+    - makemat -P new                                                                                        # [osx or linux64]
+    - diff new.mtx test_input.mtx                                                                               # [osx or linux64]
+
+about:
+  summary: BLAST finds regions of similarity between biological sequences.
+  home: http://blast.ncbi.nlm.nih.gov/
+  license: Public Domain
