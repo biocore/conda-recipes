@@ -1,9 +1,9 @@
---- run_disopred.pl	2017-02-16 08:45:17.819442841 -0800
-+++ run_disopred.pl_u.orig	2017-02-23 15:16:44.097665890 -0800
-@@ -43,7 +43,7 @@
- my ($out_dir, $base) = (dirname($fasta_fn), basename($fasta_fn));
- 
+--- run_disopred.pl	2017-02-23 15:48:31.417523628 -0800
++++ run_disopred.un.pl	2017-02-23 15:49:07.602206511 -0800
+@@ -58,7 +58,7 @@
  $base =~ s/\.fa(sta)?$//;
+ $base =~ s/\.mtx$//;
+ 
 -my $host_id = `hostid`;
 +my $host_id = `uname -n`;
  chomp $host_id;
