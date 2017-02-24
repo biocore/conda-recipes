@@ -6,6 +6,7 @@ source:
   url: http://bioinfadmin.cs.ucl.ac.uk/downloads/DISOPRED/DISOPRED3.16.tar.gz
   md5: e5ff8c031f06c69dfed214636c6e1b64
   patches:
+    - clkrate.patch # defined CLKRATE in src/disord_pred.c
     - relpaths.patch # make wrapper relocatable
     - addcmdarguments.patch # add abilty to re-use pre-computed PSI-BLAST results and adding some cmd line arguments
     - uname-n.patch # replace hostid by uname -n since the former does not exists in OS X
