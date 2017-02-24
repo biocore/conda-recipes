@@ -19,22 +19,20 @@ test:
     - test_input.mtx
     - test_result.out
   requires:
-    - blast-legacy ==2.2.22
-    - perl-gd
+    - blast-legacy ==2.2.26
   commands:
     - gunzip -f swissprot-rat.fasta.gz
     - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
     - mkdir -p runFasta/output runFasta/input
-    - run_memsat-svm.pl -p 1 -mtx 0 -j runFasta/output/ -e 0 -i runFasta/input/ -d swissprot-rat.fasta test_input.fasta
+    - run_memsat-svm.pl -g 0 -p 1 -mtx 0 -j runFasta/output/ -e 0 -i runFasta/input/ -d swissprot-rat.fasta test_input.fasta
     - diff runFasta/output/test_input_SVM_ALL.out test_result.out
     - mkdir -p runMtx/output runMtx/input
-    - run_memsat-svm.pl -p 1 -mtx 1 -j runMtx/output/ -e 0 -i runMtx/input/ -d swissprot-rat.fasta test_input.mtx
+    - run_memsat-svm.pl -g 0 -p 1 -mtx 1 -j runMtx/output/ -e 0 -i runMtx/input/ -d swissprot-rat.fasta test_input.mtx
     - diff runMtx/output/test_input_SVM_ALL.out test_result.out
 
 requirements:
   run:
-    - blast-legacy ==2.2.22
-    - perl-gd
+    - blast-legacy ==2.2.26
 
 about:
   summary: SVM Transmembrane protein structure prediction
