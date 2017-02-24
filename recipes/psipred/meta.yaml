@@ -23,10 +23,10 @@ test:
     - gunzip -f swissprot-rat.fasta.gz
     - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
     - runpsipred.pl -mtx 0 -d swissprot-rat.fasta test_input.fasta
-    - diff psitmp*/test_input.fasta.horiz test_result.out
+    - diff *psitmp*/test_input.fasta.horiz test_result.out
     - rm -rf psitmp*
     - runpsipred.pl -mtx 1 test_input.mtx
-    - diff psitmp*/test_input.mtx.horiz test_result.out
+    - diff *psitmp*/test_input.mtx.horiz test_result.out
 
 requirements:
   run:
