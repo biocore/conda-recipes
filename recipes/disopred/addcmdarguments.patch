@@ -1,6 +1,6 @@
---- run_disopred.pl.orig	2017-02-16 08:45:17.819442841 -0800
-+++ run_disopred.pl	2017-02-17 12:45:30.779262770 -0800
-@@ -7,15 +7,22 @@
+--- run_disopred.pl	2017-02-23 22:03:56.896019638 -0800
++++ run_disopred.args.pl	2017-02-23 22:03:12.194583637 -0800
+@@ -7,11 +7,18 @@
  ##
  ## Please refer to the license agreement for permission of use and re-distribution
  ##
@@ -20,11 +20,6 @@
  
  ## IMPORTANT: Set the paths to folder with the NCBI executables and to the
  ## sequence database
--my $NCBI_DIR = "/home/bin/blast-2.2.26/bin/";
-+my $NCBI_DIR = "";
- my $SEQ_DB = "/home/uniref/uniref90";
- 
- ## IMPORTANT: Changing these flags will alter the behaviour of blastpgp
 @@ -32,41 +39,54 @@
  
  my $DISO2_FPR = 5; # the adjustable DISOPRED2 false positive rate, represented as an integer between 1 and 10
