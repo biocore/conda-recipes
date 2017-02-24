@@ -43,16 +43,11 @@
 +	print "Cleaning up ...\n";
 +	my @filesToDelete = ('input', 'psiblast.chk', 'psiblast.blast', 'psiblast.pn', 'psiblast.sn', 'psiblast.mn', 'psiblast.aux', 'pass1.ss');
 +	push @filesToDelete, 'psiblast.mtx' if ($mtx != 1);
-+	foreach my $file (@filesToDelete) {
-+		qx(rm -f $tmproot/$file);
-+	}
++ qx(rm -f $tmproot/$_) for @filesToDelete;
 +	
 +	my $pwd = qx(pwd); chomp $pwd; $pwd .= '/';
 +	print "Final output files: ";
-+	foreach my $file (@{$resfiles}) {
-+		$file =~ s/^$pwd//;
-+		print $file." ";
-+	}
++ print join(" ", map { s/^$pwd//r } @{$resfiles});
 +	print "Finished.\n";
 +}
 +
@@ -111,7 +106,7 @@
 +				"d=s" => \$dbname,
 +				"n=s" => \$ncbidir,
 +				"mtx=i" => \$mtx,
-+		        "h"  => sub {&usage;});
++				"h"  => sub {&usage;});
 +
 +	&usage if (!$ARGV[0]);
 +	($inputfile) = @ARGV;
