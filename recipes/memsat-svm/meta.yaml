@@ -6,6 +6,7 @@ source:
   url: http://bioinfadmin.cs.ucl.ac.uk/downloads/memsat-svm/memsat-svm1.3.tar.gz
   md5: 245896ff433d361fdd969b72be440359
   patches:
+    - reloc.patch # make the program relocatable
     - badfd.patch # correct syntax: \>& to &>
     - ignoreblasttest.patch # ignore the -T test for blast database, because it does not work with splitted databases
 
