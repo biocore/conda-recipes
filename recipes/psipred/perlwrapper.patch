@@ -1,6 +1,6 @@
 --- runpsipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ runpsipred.stefan	2017-02-22 12:03:16.986281400 -0800
-@@ -0,0 +1,176 @@
++++ runpsipred.stefan2	2017-02-24 11:11:52.240004869 -0800
+@@ -0,0 +1,171 @@
 +#!/usr/bin/perl
 +
 +# This is a wrapper script to run PSIPRED
@@ -43,11 +43,11 @@
 +	print "Cleaning up ...\n";
 +	my @filesToDelete = ('input', 'psiblast.chk', 'psiblast.blast', 'psiblast.pn', 'psiblast.sn', 'psiblast.mn', 'psiblast.aux', 'pass1.ss');
 +	push @filesToDelete, 'psiblast.mtx' if ($mtx != 1);
-+ qx(rm -f $tmproot/$_) for @filesToDelete;
++    qx(rm -f $tmproot/$_) for @filesToDelete;
 +	
 +	my $pwd = qx(pwd); chomp $pwd; $pwd .= '/';
 +	print "Final output files: ";
-+ print join(" ", map { s/^$pwd//r } @{$resfiles});
++    print join(" ", map { s/^$pwd// } @{$resfiles});
 +	print "Finished.\n";
 +}
 +
