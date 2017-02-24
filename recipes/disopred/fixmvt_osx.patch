@@ -1,0 +1,11 @@
+--- src/Makefile	2014-11-17 05:00:59.000000000 -0800
++++ src/Makefile.fixmv	2017-02-24 15:17:51.271229281 -0800
+@@ -19,7 +19,7 @@
+ 
+ install:
+ 		mkdir ../bin/
+-		mv -t ../bin disopred2 diso_neu_net diso_neighb combine svm-predict
++		mv disopred2 diso_neu_net diso_neighb combine svm-predict ../bin/
+ 
+ clean:
+ 		rm -f disopred2 diso_neu_net diso_neighb combine svm-predict *~

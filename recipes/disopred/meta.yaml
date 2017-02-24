@@ -7,6 +7,7 @@ source:
   md5: e5ff8c031f06c69dfed214636c6e1b64
   patches:
     - clkrate.patch # defined CLKRATE in src/disord_pred.c
+    - fixmvt_osx.patch # avoid usage of -t parameter in mv due to issues in OSX
     - relpaths.patch # make wrapper relocatable
     - addcmdarguments.patch # add abilty to re-use pre-computed PSI-BLAST results and adding some cmd line arguments
     - uname-n.patch # replace hostid by uname -n since the former does not exists in OS X
