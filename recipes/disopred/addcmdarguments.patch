@@ -1,0 +1,178 @@
+--- run_disopred.pl	2017-02-23 22:03:56.896019638 -0800
++++ run_disopred.args.pl	2017-02-23 22:03:12.194583637 -0800
+@@ -7,11 +7,18 @@
+ ##
+ ## Please refer to the license agreement for permission of use and re-distribution
+ ##
++## Stefan Janssen: patched this script to make it more convenient to the user, by
++## adding arguments to: 
++##	  1) specify blast database: -d
++##	  2) output directory: -o 
++##	  3) blast binary directory: -n
++##	  4) resume computation from pre-computed PSIBLAST search: -mtx
+ 
+ use strict;
+ use File::Basename;
+ use Cwd qw(abs_path);
+-
++use Getopt::Long;
++use Data::Dumper;
+ 
+ ## IMPORTANT: Set the paths to folder with the NCBI executables and to the
+ ## sequence database
+@@ -32,41 +39,54 @@
+ 
+ my $DISO2_FPR = 5; # the adjustable DISOPRED2 false positive rate, represented as an integer between 1 and 10
+ 
++my $mtx = 0;
++my $outdir = undef;
++&get_arguments();
++
+ # check whether the command line contains only one argument
+-die "[$0] ERROR: The command line should only contain the path to the input sequence file\n" if ( scalar @ARGV != 1);
++die "[$0] ERROR: The command line should only contain the path to the input sequence file or mtx file\n" if ( scalar @ARGV != 1);
+ 
+ # die if input file does not exist or is not a text file
+ die "[$0] ERROR: Input file $ARGV[0] does not exist\n"  if !-e $ARGV[0];
+ die "[$0] ERROR: Input file $ARGV[0] does not look like a text file\n"  if !-T $ARGV[0];
+ 
+ my $fasta_fn = abs_path($ARGV[0]);
++my $mtx_fn = $fasta_fn;
+ my ($out_dir, $base) = (dirname($fasta_fn), basename($fasta_fn));
++$out_dir = $outdir if (defined $outdir);
+ 
+ $base =~ s/\.fa(sta)?$//;
++$base =~ s/\.mtx$//;
++
+ my $host_id = `hostid`;
+ chomp $host_id;
+ my $tmp_base = join '_', $base , $$, $host_id;
+ 
+-my ($hits_file, $chk_file) = map {my $name = join '.', $tmp_base, $_; join '/', $out_dir, $name } ("blast", "chk");
+-
+-print "Running PSI-BLAST search ...\n\n";
+-# run psiblast
+-my $args = join ' ', $NCBI_DIR."blastpgp", "-i", $fasta_fn, "-d", $SEQ_DB, $PSIBLAST_PAR, "-C", $chk_file, "-o", $hits_file, "\n";
+-system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
+-
+-print "Generating PSSM ...\n\n";
+-
+-$args = join ' ', "echo", $chk_file, ">", $tmp_base.".pn", "\n";
+-system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
+-
+-$args = join ' ', "echo", $fasta_fn, ">", $tmp_base.".sn", "\n";
+-system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
+-
+-$args = join ' ', $NCBI_DIR."makemat", "-P", $tmp_base, "\n";
+-system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
+-
+-my $mtx_fn = join '/', $out_dir, $tmp_base.".mtx";
+-die "[$0] ERROR: Couldn't find the mtx file $mtx_fn\n" if !-e $mtx_fn;
++my ($args, $hits_file, $chk_file) = (undef, "", "");
++if ($mtx == 0) {
++	($hits_file, $chk_file) = map {my $name = join '.', $tmp_base, $_; join '/', $out_dir, $name } ("blast", "chk");
++
++	print "Running PSI-BLAST search ...\n\n";
++	# run psiblast
++	$args = join ' ', $NCBI_DIR."blastpgp", "-i", $fasta_fn, "-d", $SEQ_DB, $PSIBLAST_PAR, "-C", $chk_file, "-o", $hits_file, "\n";
++	system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
++
++	print "Generating PSSM ...\n\n";
++
++	$args = join ' ', "echo", $chk_file, ">", $tmp_base.".pn", "\n";
++	system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
++
++	$args = join ' ', "echo", $fasta_fn, ">", $tmp_base.".sn", "\n";
++	system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
++
++	$args = join ' ', $NCBI_DIR."makemat", "-P", $tmp_base, "\n";
++	system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
++
++	$mtx_fn = join '/', $out_dir, $tmp_base.".mtx";
++	die "[$0] ERROR: Couldn't find the mtx file $mtx_fn\n" if !-e $mtx_fn;
++} else {
++	print "Re-using pre-computed PSI-BLAST search ...\n\n";
++}
+ 
+ my @exts = ("diso", "diso2", "nndiso", "dnb", "diso", "in_svm_dat", "out_svm_dat", "pbdat");
+ my ($diso_fn, $diso2_fn, $nndiso_fn, $dnb_fn, $diso3_fn, $dat_fn, $svc_fn, $pb_fn) = map { abs_path(join '/', $out_dir, $base.".$_") } @exts;
+@@ -108,12 +128,78 @@
+ 
+ # Remove temporary files
+ print "Cleaning up ...\n\n";
+-$args = join ' ', "rm -f", $hits_file, $chk_file, "error.log", $mtx_fn, <$tmp_base*>, glob("$out_dir/*horiz_d"), $diso2_fn, $nndiso_fn, $dnb_fn, $dat_fn, $svc_fn, "\n";
++my @psiblast_files = ();
++@psiblast_files = ($hits_file, $mtx_fn, $chk_file) if ($mtx == 0);
++$args = join ' ', "rm -f", @psiblast_files, "error.log", <$tmp_base*>, glob("$out_dir/*horiz_d"), $diso2_fn, $nndiso_fn, $dnb_fn, $dat_fn, $svc_fn, "\n";
+ system($args) == 0 or die "[$0] ERROR: $args failed: $?\n";
+ 
+ print join "\n\n", "Finished", "Disordered residue predictions in $diso3_fn", "Protein binding disordered residue predictions in $pb_fn", '';
+ 0;
+ 
++# Process command line arguments
++sub get_arguments {
++
++	my $result = GetOptions ("n=s" => \$NCBI_DIR,
++				"mtx=i" => \$mtx,
++				"d=s" => \$SEQ_DB,
++				"o=s" => \$outdir,
++			        "h"  => sub {&usage;});
++
++	&usage if (!$ARGV[0]);
++
++	unless($mtx){
++		## Check the NCBI directory
++		unless (-d $NCBI_DIR){
++
++			## Look for the NCBI directory
++			my $system = `which blastpgp`;
++			if ($system =~ /(.*)\/blastpgp$/){
++				$NCBI_DIR = $1;
++				$NCBI_DIR =~ s/\s+//g;	
++			}
++			
++			$NCBI_DIR .= '/' if (substr($NCBI_DIR, -1, 1) ne '/');
++
++			unless (-d $NCBI_DIR){
++				print "NCBI directory $NCBI_DIR doesn't exist. Please pass it using\n"; 
++				print "the -n paramater or modifiy the value at the top of the script.\n\n";
++				exit 1;
++			}
++		}
++
++		## Make sure we can find blastpgp & makemat
++		my $psiblast = $NCBI_DIR."/blastpgp";
++		my $makemat = $NCBI_DIR."/makemat";
++		unless (-e $psiblast){
++			print "Can't find the program blastpgp in the NCBI directory $NCBI_DIR\n"; 
++			print "Please pass the correct NCBI location using the -n parameter or modify\n";
++			print "the value at the top of the script..\n\n";
++			exit 1;			
++		}
++		unless (-e $makemat){
++			print "Can't find the program makemat in the NCBI directory $NCBI_DIR\n"; 
++			print "Please pass the correct NCBI location using the -n parameter or modify\n";
++			print "the value at the top of the script.\n\n";
++			exit 1;				
++		}
++	}
++}
++
++# Usage
++sub usage {
++	print "Version 3.16\n\n";
++	print "Usage: run_disopred.pl [options] <fasta file 1>\n\n";
++	print "Options:\n\n";
++	print "-mtx <0|1>     Process PSI-BLAST .mtx files instead of fasta files. Default 0.\n";
++	print "-n <directory> NCBI binary directory (location of blastpgp and makemat)\n";
++	print "-d <path>      Database for running PSI-BLAST.\n";
++	print "-o <dirname>   Output directory name. Default: dir of input file.\n";
++	print "               <fasta file>.memsat_svm\n";
++	print "-h <0|1>       Show help. Default 0.\n";
++	exit 1;
++}
++
++
+ # Parse disordered residue predictions and obtain positional information about intrinsically disordered regions
+ sub parse_disopred3_file {
+ 	my $pred_fn = $_[0];
