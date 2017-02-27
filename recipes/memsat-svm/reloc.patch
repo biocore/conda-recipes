@@ -1,0 +1,22 @@
+--- run_memsat-svm.pl	2013-09-09 09:18:43.000000000 -0700
++++ run_memsat-svm.reloc.pl	2017-02-24 11:15:27.253626507 -0800
+@@ -22,16 +22,16 @@
+ 
+ ## IMPORTANT : this variable must be set here to the absolute path to the
+ ## library called "lib" and found in the same directory as this script.
+-use lib 'lib';
++use lib '/opt/anaconda1anaconda2anaconda3/share/memsat-svm/lib/';
+ use Round qw(:all);
+ 
+ ## IMPORTANT : this variable must be set to the directory containing this
+ ## script either here or using flag '-w' at runtime.
+-my $mem_dir = '';
++my $mem_dir = '/opt/anaconda1anaconda2anaconda3/share/memsat-svm/';
+ 
+ ## IMPORTANT : these paths (folder with the NCBI executables and path to the
+ ## database) must be set either here or using the appropriate flags at runtime.
+-my $ncbidir = '';
++my $ncbidir = '/opt/anaconda1anaconda2anaconda3/bin/';
+ my $dbname = '';
+ 
+ ## Executable and input/output paths are initialised in sub get_arguments.

@@ -1,0 +1,1 @@
+echo "Installation successful. Now you can run 'run_memsat-svm.pl'." > $PREFIX/.messages.txt

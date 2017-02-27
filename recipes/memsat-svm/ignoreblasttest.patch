@@ -1,0 +1,20 @@
+--- run_memsat-svm.pl	2017-02-17 13:46:43.000000000 -0800
++++ run_memsat-svm.better.pl	2017-02-17 13:46:37.000000000 -0800
+@@ -264,11 +264,12 @@
+ 			exit 1;				
+ 		}
+ 
+-		unless (-T $dbname){
+-			print "The database name for PSI-BLAST searches has not been set correctly.\n"; 
+-			print "Please pass it using the -d parameter or modify the value at the top of the script.\n\n";
+-			exit 1;		
+-		}
++		#~ Stefan Janssen: skip this test, because it is not compatible to split blast databases!
++		#~ unless (-T $dbname){
++			#~ print "The database name for PSI-BLAST searches has not been set correctly.\n"; 
++			#~ print "Please pass it using the -d parameter or modify the value at the top of the script.\n\n";
++			#~ exit 1;		
++		#~ }
+ 	}
+ 	
+ 	## Check that $mem_dir is valid and then set all other paths.
