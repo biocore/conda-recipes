@@ -22,11 +22,12 @@ test:
   commands:
     - gunzip -f swissprot-rat.fasta.gz
     - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
-    - run_psipred.pl -mtx 0 -d swissprot-rat.fasta test_input.fasta
-    - diff *psitmp*/test_input.fasta.horiz test_result.out
-    - rm -rf psitmp*
-    - run_psipred.pl -mtx 1 test_input.mtx
-    - diff *psitmp*/test_input.mtx.horiz test_result.out
+    - mkdir psitmp
+    - run_psipred.pl -o ./psitmp/ -mtx 0 -d swissprot-rat.fasta test_input.fasta
+    - diff ./psitmp/test_input.fasta.horiz test_result.out
+    - rm -rf ./psitmp/*
+    - run_psipred.pl -o ./psitmp/ -mtx 1 test_input.mtx
+    - diff ./psitmp/test_input.mtx.horiz test_result.out
 
 requirements:
   run:
