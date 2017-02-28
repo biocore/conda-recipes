@@ -1,0 +1,1 @@
+echo "Installation successful. Now you can run 'runpsipred.pl'." > $PREFIX/.messages.txt

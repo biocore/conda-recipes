@@ -1,0 +1,24 @@
+--- run_disopred.pl	2017-02-23 21:56:54.039966378 -0800
++++ run_disopred.dirs.pl	2017-02-23 22:00:31.509045282 -0800
+@@ -15,7 +15,7 @@
+ 
+ ## IMPORTANT: Set the paths to folder with the NCBI executables and to the
+ ## sequence database
+-my $NCBI_DIR = "/home/bin/blast-2.2.26/bin/";
++my $NCBI_DIR = "/opt/anaconda1anaconda2anaconda3/bin/";
+ my $SEQ_DB = "/home/uniref/uniref90";
+ 
+ ## IMPORTANT: Changing these flags will alter the behaviour of blastpgp
+@@ -25,9 +25,9 @@
+ ## IMPORTANT: Moving the bin/, data, or dso_lib directories to a different location will cause the programs
+ ## to crash, unless you change the variables below accordingly
+ my $dir = dirname $0;
+-my $EXE_DIR = abs_path(join '/', $dir, "bin"); # the path of the bin directory
+-my $DATA_DIR = abs_path(join '/', $dir,"data"); # the path of the data directory
+-$ENV{DSO_LIB_PATH} = join '/', abs_path($dir), "dso_lib/"; # the path of the library directory used by the nearest neighbour classifier
++my $EXE_DIR = '/opt/anaconda1anaconda2anaconda3/bin'; # the path of the bin directory
++my $DATA_DIR = '/opt/anaconda1anaconda2anaconda3/share/disopred_3.16/data/'; # the path of the data directory
++$ENV{DSO_LIB_PATH} = '/opt/anaconda1anaconda2anaconda3/share/disopred_3.16/dso_lib/'; # the path of the library directory used by the nearest neighbour classifier
+ exists $ENV{DSO_LIB_PATH} or die "[$0] ERROR: DSO_LIB_PATH environmental variable not set\n";
+ 
+ my $DISO2_FPR = 5; # the adjustable DISOPRED2 false positive rate, represented as an integer between 1 and 10

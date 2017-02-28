@@ -1,0 +1,11 @@
+--- run_disopred.pl	2017-02-23 15:48:31.417523628 -0800
++++ run_disopred.un.pl	2017-02-23 15:49:07.602206511 -0800
+@@ -58,7 +58,7 @@
+ $base =~ s/\.fa(sta)?$//;
+ $base =~ s/\.mtx$//;
+ 
+-my $host_id = `hostid`;
++my $host_id = `uname -n`;
+ chomp $host_id;
+ my $tmp_base = join '_', $base , $$, $host_id;
+ 

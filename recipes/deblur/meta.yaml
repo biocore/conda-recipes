@@ -7,37 +7,38 @@ source:
   git_rev: 1.0.1
 
 build:
-  number: 1
-  
+  number: 2
+
 requirements:
   build:
-    - setuptools
     - python
-    - scikit-bio
+    - biom-format
+    - setuptools
+    - scikit-bio >=0.5.0
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
     - biom-format
     - h5py
     - click
-    - pip
 
   run:
-    - setuptools
     - python
-    - scikit-bio
+    - biom-format
+    - setuptools
+    - scikit-bio >=0.5.0
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
     - biom-format
     - h5py
     - click
-    - pip
 
 test:
   imports:
     - deblur
-
+  commands:
+    - deblur --help
 about:
   home: https://github.com/biocore/deblur
   license: BSD license

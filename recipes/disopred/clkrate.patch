@@ -1,0 +1,11 @@
+--- src/disord_pred.c	2014-11-17 05:00:59.000000000 -0800
++++ src/disord_pred.fixed.c	2017-02-24 14:29:36.000000000 -0800
+@@ -228,6 +228,8 @@
+ 
+ #ifdef unix
+ #define CLKRATE 1000000
++#else
++#define CLKRATE 1
+ #endif
+ 
+ #ifdef CLK_TCK

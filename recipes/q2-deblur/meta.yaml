@@ -1,0 +1,53 @@
+package:
+  name: q2-deblur
+  version: "2017.2.2"
+
+source:
+  git_url: https://github.com/wasade/q2-deblur.git
+  git_rev: 2017.2.2
+
+build:
+  number: 0
+  
+requirements:
+  build:
+    - setuptools
+    - python
+    - scikit-bio
+    - deblur ==1.0.0
+    - vsearch ==2.0.3
+    - mafft ==7.221
+    - sortmerna ==2.0
+    - h5py
+    - click
+    - pip
+    - qiime2 ==2017.2.0
+    - q2cli ==2017.2.0
+    - q2-types ==2017.2.0
+    - q2cli ==2017.2.0
+
+  run:
+    - setuptools
+    - python
+    - scikit-bio
+    - vsearch ==2.0.3
+    - deblur ==1.0.0
+    - mafft ==7.221
+    - sortmerna ==2.0
+    - h5py
+    - click
+    - pip
+    - qiime2 ==2017.2.0
+    - q2cli ==2017.2.0
+    - q2-types ==2017.2.0
+    - q2cli ==2017.2.0
+
+test:
+  imports:
+    - q2_deblur
+  commands:
+    - qiime deblur denoise-16S --help
+
+about:
+  home: https://github.com/biocore/deblur
+  license: BSD license
