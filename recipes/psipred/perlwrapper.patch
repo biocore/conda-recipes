@@ -1,6 +1,6 @@
 --- run_psipred.pl	1969-12-31 16:00:00.000000000 -0800
-+++ run_psipred.pl.stefan	2017-02-27 12:57:40.371135850 -0800
-@@ -0,0 +1,183 @@
++++ run_psipred.pl.stefan	2017-02-27 16:12:00.456963436 -0800
+@@ -0,0 +1,184 @@
 +#!/usr/bin/perl
 +
 +# This is a wrapper script to run PSIPRED
@@ -117,6 +117,7 @@
 +				"d=s" => \$dbname,
 +				"n=s" => \$ncbidir,
 +				"mtx=i" => \$mtx,
++				"o=s" => \$outputdir,
 +				"h"  => sub {&usage;});
 +
 +	&usage if (!$ARGV[0]);
