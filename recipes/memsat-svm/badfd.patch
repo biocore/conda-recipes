@@ -1,0 +1,13 @@
+--- run_memsat-svm.pl	2013-09-09 09:18:43.000000000 -0700
++++ run_memsat-svm.badfd.pl	2017-02-21 09:24:58.516103503 -0800
+@@ -388,8 +388,8 @@
+ 		my $tmp_fasta = "$tmp_rootpath.fasta";
+ 		my $tmp_chk = "$tmp_rootpath.chk";
+ 		my $system = `cp -f $fasta $tmp_fasta`;
+-		print "$ncbidir/blastpgp -a $cores -j 2 -h 1e-3 -e 1e-3 -b 0 -d $dbname -i $tmp_fasta -C $tmp_chk >& $blast_out\n\n";
+-		$system = `$ncbidir/blastpgp -a $cores -j 2 -h 1e-3 -e 1e-3 -b 0 -d $dbname -i $tmp_fasta -C $tmp_chk >& $blast_out`;
++		print "$ncbidir/blastpgp -a $cores -j 2 -h 1e-3 -e 1e-3 -b 0 -d $dbname -i $tmp_fasta -C $tmp_chk &> $blast_out\n\n";
++		$system = `$ncbidir/blastpgp -a $cores -j 2 -h 1e-3 -e 1e-3 -b 0 -d $dbname -i $tmp_fasta -C $tmp_chk &> $blast_out`;
+ 		
+ 		unless (-e $tmp_chk){
+ 		

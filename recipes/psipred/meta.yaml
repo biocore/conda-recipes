@@ -1,0 +1,38 @@
+package:
+  name: psipred
+  version: "4.01"
+
+source:
+  url: http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/psipred.4.01.tar.gz
+  md5: 9b66818f2a46ad6b4ac30756fdf5436d
+  patches:
+    - perlwrapper.patch # provide a Perl wrapper for psipred
+    
+build:
+  number: 1
+
+test:
+  files:
+    - swissprot-rat.fasta.gz
+    - test_input.fasta
+    - test_input.mtx
+    - test_result.out
+  requires:
+    - blast-legacy ==2.2.26
+  commands:
+    - gunzip -f swissprot-rat.fasta.gz
+    - formatdb -p T -i swissprot-rat.fasta -n swissprot-rat.fasta
+    - mkdir psitmp
+    - run_psipred.pl -o ./psitmp/ -mtx 0 -d swissprot-rat.fasta test_input.fasta
+    - diff ./psitmp/test_input.fasta.horiz test_result.out
+    - rm -rf ./psitmp/*
+    - run_psipred.pl -o ./psitmp/ -mtx 1 test_input.mtx
+    - diff ./psitmp/test_input.mtx.horiz test_result.out
+
+requirements:
+  run:
+    - blast-legacy ==2.2.26
+
+about:
+  summary: Accurate protein secondary structure prediction
+  home: http://bioinf.cs.ucl.ac.uk/software_downloads/
