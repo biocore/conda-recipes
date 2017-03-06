@@ -13,7 +13,7 @@ requirements:
   build:
     - setuptools
     - python
-    - scikit-bio
+    - scikit-bio >=0.5.1
     - pandas
     - scipy
     - numpy
@@ -21,7 +21,7 @@ requirements:
     - bokeh
     - seaborn
     - h5py
-    - statsmodels
+    - statsmodels >=0.8.0
     - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
@@ -32,7 +32,7 @@ requirements:
   run:
     - setuptools
     - python
-    - scikit-bio
+    - scikit-bio >=0.5.1
     - pandas
     - scipy
     - numpy
@@ -40,7 +40,7 @@ requirements:
     - bokeh
     - seaborn
     - h5py
-    - statsmodels
+    - statsmodels >=0.8.0
     - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
