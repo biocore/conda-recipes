@@ -1,13 +1,13 @@
 package:
   name: gneiss
-  version: 0.3.0
+  version: 0.3.1
 
 source:
   git_url: https://github.com/biocore/gneiss.git
-  git_rev: v0.3.0
+  git_rev: v0.3.1
 
 build:
-  number: 1
+  number: 3
 
 requirements:
   build:
