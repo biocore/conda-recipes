@@ -12,7 +12,7 @@ build:
 requirements:
   build:
     - setuptools
-    - python ==3.5
+    - python
     - scikit-bio
     - pandas
     - scipy
@@ -30,7 +30,7 @@ requirements:
     - pip
   run:
     - setuptools
-    - python ==3.5
+    - python
     - scikit-bio
     - pandas
     - scipy
