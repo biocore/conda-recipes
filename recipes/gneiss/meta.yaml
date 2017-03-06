@@ -21,6 +21,7 @@ requirements:
     - bokeh
     - seaborn
     - h5py
+    - statsmodels
     - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
@@ -39,6 +40,7 @@ requirements:
     - bokeh
     - seaborn
     - h5py
+    - statsmodels
     - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
