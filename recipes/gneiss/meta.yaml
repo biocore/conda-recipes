@@ -1,28 +1,55 @@
 package:
   name: gneiss
-  version: 0.1.0
+  version: 0.3.1
 
 source:
   git_url: https://github.com/biocore/gneiss.git
+  git_rev: v0.3.1
 
+build:
+  number: 3
 
 requirements:
   build:
+    - setuptools
     - python
-    - scikit-bio ==0.4.2
+    - scikit-bio
     - pandas
     - scipy
     - numpy
     - matplotlib
-    - pyqt <=4.11.3
+    - bokeh
+    - seaborn
+    - h5py
+    - statsmodels
+    - biom-format
+    - qiime2 ==2017.2.0
+    - q2cli ==2017.2.0
+    - q2-types ==2017.2.0
+    - q2-feature-table ==2017.2.0
+    - q2-composition ==2017.2.0
+    - pip
   run:
+    - setuptools
     - python
-    - scikit-bio ==0.4.2
+    - scikit-bio
     - pandas
     - scipy
     - numpy
     - matplotlib
-    - pyqt <=4.11.3
+    - bokeh
+    - seaborn
+    - h5py
+    - statsmodels
+    - biom-format
+    - qiime2 ==2017.2.0
+    - q2cli ==2017.2.0
+    - q2-types ==2017.2.0
+    - q2-feature-table ==2017.2.0
+    - q2-composition ==2017.2.0
+    - pip
+
+
 test:
   # Python imports
   imports:
@@ -30,5 +57,5 @@ test:
 
 about:
   home: https://github.com/biocore/gneiss
-  license: GPLv3 License
+  license: BSD License
   summary: Compositional Analysis and Visualization toolkit
