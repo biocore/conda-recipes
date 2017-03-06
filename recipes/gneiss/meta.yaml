@@ -16,7 +16,7 @@ requirements:
     - scikit-bio >=0.5.1
     - pandas
     - scipy
-    - numpy
+    - numpy >=1.11
     - matplotlib
     - bokeh
     - seaborn
@@ -35,7 +35,7 @@ requirements:
     - scikit-bio >=0.5.1
     - pandas
     - scipy
-    - numpy
+    - numpy >=1.11
     - matplotlib
     - bokeh
     - seaborn
