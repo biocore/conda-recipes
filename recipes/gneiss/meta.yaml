@@ -20,7 +20,6 @@ requirements:
     - matplotlib
     - bokeh
     - seaborn
-    - statsmodels
     - h5py
     - biom-format
     - qiime2 ==2017.2.0
@@ -39,7 +38,6 @@ requirements:
     - matplotlib
     - bokeh
     - seaborn
-    - statsmodels
     - h5py
     - biom-format
     - qiime2 ==2017.2.0
