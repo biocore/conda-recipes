@@ -11,6 +11,7 @@ build:
 
 requirements:
   build:
+    - setuptools
     - python ==3.5
     - scikit-bio
     - pandas
@@ -19,12 +20,17 @@ requirements:
     - matplotlib
     - bokeh
     - seaborn
+    - statsmodels
+    - h5py
+    - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
     - q2-types ==2017.2.0
     - q2-feature-table ==2017.2.0
     - q2-composition ==2017.2.0
+    - pip
   run:
+    - setuptools
     - python ==3.5
     - scikit-bio
     - pandas
@@ -33,11 +39,15 @@ requirements:
     - matplotlib
     - bokeh
     - seaborn
+    - statsmodels
+    - h5py
+    - biom-format
     - qiime2 ==2017.2.0
     - q2cli ==2017.2.0
     - q2-types ==2017.2.0
     - q2-feature-table ==2017.2.0
     - q2-composition ==2017.2.0
+    - pip
 
 
 test:
