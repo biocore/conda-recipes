@@ -1,10 +1,10 @@
 package:
   name: q2-deblur
-  version: "2017.2.2"
+  version: "2017.2.3"
 
 source:
   git_url: https://github.com/wasade/q2-deblur.git
-  git_rev: 2017.2.2
+  git_rev: 2017.2.3
 
 build:
   number: 0
@@ -22,7 +22,6 @@ requirements:
     - click
     - pip
     - qiime2 ==2017.2.0
-    - q2cli ==2017.2.0
     - q2-types ==2017.2.0
     - q2cli ==2017.2.0
 
@@ -38,7 +37,6 @@ requirements:
     - click
     - pip
     - qiime2 ==2017.2.0
-    - q2cli ==2017.2.0
     - q2-types ==2017.2.0
     - q2cli ==2017.2.0
 
