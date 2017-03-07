@@ -14,7 +14,7 @@ requirements:
     - setuptools
     - python
     - scikit-bio
-    - deblur ==1.0.0
+    - deblur ==1.0.1
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
@@ -30,7 +30,7 @@ requirements:
     - python
     - scikit-bio
     - vsearch ==2.0.3
-    - deblur ==1.0.0
+    - deblur ==1.0.1
     - mafft ==7.221
     - sortmerna ==2.0
     - h5py
