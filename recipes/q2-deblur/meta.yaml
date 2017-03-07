@@ -24,6 +24,7 @@ requirements:
     - qiime2 ==2017.2.0
     - q2-types ==2017.2.0
     - q2cli ==2017.2.0
+    - q2templates ==2017.2.0
 
   run:
     - setuptools
@@ -39,6 +40,7 @@ requirements:
     - qiime2 ==2017.2.0
     - q2-types ==2017.2.0
     - q2cli ==2017.2.0
+    - q2templates ==2017.2.0
 
 test:
   imports:
