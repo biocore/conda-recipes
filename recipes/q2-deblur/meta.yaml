@@ -7,14 +7,14 @@ source:
   git_rev: 2017.2.3
 
 build:
-  number: 0
+  number: 1
   
 requirements:
   build:
     - setuptools
     - python
     - scikit-bio
-    - deblur ==1.0.1
+    - deblur >=1.0.2
     - vsearch ==2.0.3
     - mafft ==7.221
     - sortmerna ==2.0
@@ -31,7 +31,7 @@ requirements:
     - python
     - scikit-bio
     - vsearch ==2.0.3
-    - deblur ==1.0.1
+    - deblur >=1.0.2
     - mafft ==7.221
     - sortmerna ==2.0
     - h5py
