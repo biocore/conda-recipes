@@ -11,9 +11,9 @@ Currently, the packages (and their versions) are built and available on the anac
 
 To install a package, you just need to run:
 
-    conda install -c https://conda.anaconda.org/biocore <package-name>
+    conda install -c biocore -c bioconda -c conda-forge <package-name>
 
-No endless headache of time-consuming compilation and missing dependecies any more!
+This installation command tries to install the package from the previous channel; if not found, it then tries to install from the following packages. We order the channels from more specific to more general channels. No endless headache of time-consuming compilation and missing dependecies any more!
 
 
 ## Create a new conda recipe
