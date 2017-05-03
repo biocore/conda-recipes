@@ -5,11 +5,23 @@ package:
 source:
   fn: sortmerna-2.0-no-db.tar.gz
   url: ftp://ftp.microbio.me/pub/sortmerna-2.0-no-db.tar.gz
- 
+
+build:
+  number: 1
+
 test:
   commands:
     - sortmerna --version
- 
+    
+requirements:
+  build:
+    - gcc # [not osx]
+    - llvm # [osx]
+    - zlib
+  run:
+    - libgcc # [not osx]
+    - zlib
+    
 about:
   summary: SortMeRNA is a biological sequence analysis tool for filtering, mapping and OTU-picking NGS reads. 
   home: http://bioinfo.lifl.fr/RNA/sortmerna/
