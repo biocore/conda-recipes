@@ -13,9 +13,7 @@ requirements:
   build:
     - setuptools
     - python 3.5*
-  run:
-    - setuptools
-    - python 3.5*
+    - scikit-bio >=0.5.1
     - pandas
     - scipy
     - numpy >=1.11
@@ -23,14 +21,33 @@ requirements:
     - bokeh
     - seaborn
     - h5py
-    - statsmodels 0.8.0
+    - statsmodels >=0.8.0
     - biom-format
-    - qiime2 2017.6.0
-    - q2cli 2017.6.0
-    - q2-types 2017.6.0
-    - q2-composition 2017.6.0
-    - pip
-
+    - qiime2 ==2017.6.0
+    - q2cli ==2017.6.0
+    - q2-types ==2017.6.0
+    - q2-feature-table ==2017.6.0
+    - q2-composition ==2017.6.0
+    - q2-metadata ==2017.6.0
+  run:
+    - setuptools
+    - python 3.5*
+    - scikit-bio >=0.5.1
+    - pandas
+    - scipy
+    - numpy >=1.11
+    - matplotlib
+    - bokeh
+    - seaborn
+    - h5py
+    - statsmodels >=0.8.0
+    - biom-format
+    - qiime2 ==2017.6.0
+    - q2cli ==2017.6.0
+    - q2-types ==2017.6.0
+    - q2-feature-table ==2017.6.0
+    - q2-composition ==2017.6.0
+    - q2-metadata ==2017.6.0
 
 test:
   # Python imports
