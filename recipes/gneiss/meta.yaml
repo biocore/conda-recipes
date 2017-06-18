@@ -23,9 +23,9 @@ requirements:
     - h5py
     - statsmodels >=0.8.0
     - biom-format
-    - qiime2 ==2017.5.0
-    - q2cli ==2017.5.0
-    - q2-types ==2017.5.0
+    - qiime2 ==2017.6.0
+    - q2cli ==2017.6.0
+    - q2-types ==2017.6.0
     - q2-feature-table ==2017.6.0
     - q2-composition ==2017.6.0
     - q2-metadata ==2017.6.0
