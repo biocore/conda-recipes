@@ -1,10 +1,10 @@
 package:
   name: gneiss
-  version: 0.4.0
+  version: 0.4.1
 
 source:
   git_url: https://github.com/biocore/gneiss.git
-  git_rev: v0.4.0
+  git_rev: v0.4.1
 
 build:
   number: 6
@@ -22,13 +22,6 @@ requirements:
     - seaborn
     - h5py
     - statsmodels >=0.8.0
-    - biom-format
-    - qiime2 ==2017.6.0
-    - q2cli ==2017.6.0
-    - q2-types ==2017.6.0
-    - q2-feature-table ==2017.6.0
-    - q2-composition ==2017.6.0
-    - q2-metadata ==2017.6.0
   run:
     - setuptools
     - python 3.5*
@@ -40,20 +33,11 @@ requirements:
     - bokeh
     - seaborn
     - h5py
-    - statsmodels >=0.8.0
-    - biom-format
-    - qiime2 ==2017.6.0
-    - q2cli ==2017.6.0
-    - q2-types ==2017.6.0
-    - q2-feature-table ==2017.6.0
-    - q2-composition ==2017.6.0
-    - q2-metadata ==2017.6.0
 
 test:
   # Python imports
   imports:
     - gneiss
-    - qiime2.plugins.gneiss
 
 about:
   home: https://github.com/biocore/gneiss
