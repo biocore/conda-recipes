@@ -19,6 +19,7 @@ requirements:
     - numpy
     - matplotlib
     - bokeh
+    - biom-format
     - seaborn
     - h5py
     - statsmodels >=0.8.0
@@ -31,6 +32,7 @@ requirements:
     - numpy
     - matplotlib
     - bokeh
+    - biom-format
     - seaborn
     - h5py
 
