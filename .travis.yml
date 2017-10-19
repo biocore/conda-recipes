@@ -13,8 +13,8 @@ env:
     # CONDA_PY and CONDA_NPY are the env variable of python version
     # and numpy version used by "conda build"
     # to build the packages.
-    - CONDA_PY=35  CONDA_NPY=110
-    - CONDA_PY=36  CONDA_NPY=111
+    - CONDA_PY=35
+    - CONDA_PY=36
   global:
     - secure: gKgj4jR2N8WbVBnJCI52zMR21/nd2hWUb05DatiWNJ8pZ+CC6CPD7N/2t8k+y5V25NufI5ZpEBEnGbmV1AxS6ISjPHRejoQgDYTw/PjY4NEIssFVbULIB84FD9SY7/oqkr5L+jrEyDeV52d2LfSAHjwWlL4XYZ7OFdH7HW/5yUj1z4jasfFhv41x8tVknXWAeS1AEdAfwnb4lEeKvlP6jxdfqkQv9PeobM+THV7gGtUo9rA+plZuhQDzXhywRKajEbYbA7/eHzQa5kMYtf8EQl/orDOPCSMEjh9ifCsf0bcFuQkqtOKhgPGVihNdw9PErwhxAckiH2lyELilqbbk10VI/kTKb8y1yP+RmaRxHD1TzdUL5qAxlSQx8IVybnmKCgBW60FKDMsEy4m0AikVch8xkRkhThWFGHjckJFbPIw3m5iwbYK+PEGA43z6lPzUqhHB5Ww8Yeo9xwT26tDyzBhwF5rlHZ63CJ/DxMSQidY+E1ZEmJpN5UqUMxXmM54xAt2fakcUWRH6PY/w984Lc9xY/f667oef4Bgt82N9gjCVVoPERxNnJCgzJShmcnKB6KgTxmqzfI2E2WDqS/MVjoHBgzix04ZU8+gl+BG28HMf3eF3TKHCS4HJlTLZigyZIeuoM241bn+x8zq3WowAh43FtCEb3rmIAG0ur70nzf8=
 install:
