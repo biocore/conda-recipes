@@ -95,13 +95,23 @@ def is_not_uploaded(name, version, build_number, channel):
         False; otherwise, return True.
 
     '''
+    # if the package has never been uploaded so far, conda search throws an
+    # error and run() would result in an exit status != 0, causing the Python
+    # program to exit with an error. By adding ; true to the system call, we
+    # ensure that Python does not break
     check_cmd = ('conda search --json --override-channels '
-                 '-c {0} {1}').format(
+                 '-c {0} {1}; true').format(
                      channel, name)
     log.info('Checking: {0}'.format(check_cmd))
     proc = run(check_cmd, shell=True, stdout=PIPE, check=True)
     log.info(proc)
     res = json.loads(proc.stdout.decode('utf-8'))
+
+    # if the resulting object reports that package has never been uploaded,
+    # we find and 'exception_name' with value 'PackageNotFoundError'
+    if 'exception_name' in res:
+        if res['exception_name'] == 'PackageNotFoundError':
+            return True
 
     if name not in res:
         return True
