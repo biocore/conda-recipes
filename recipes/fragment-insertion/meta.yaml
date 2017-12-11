@@ -1,0 +1,53 @@
+package:
+  name: fragment-insertion
+  version: "4.3.4b"
+
+source:
+  - git_url: https://github.com/smirarab/sepp-refs.git
+  - git_rev: 4.3.4b
+  - md5: 0eb27cf575689635c779c07ac3156cc3
+  - path: onlyplacements.patch
+  - path: reloc.patch
+
+build:
+  number: 0
+  script:
+    # unpack SEPP package
+    - cd gg && tar xjvf sepp-package.tar.bz    
+    # patch sepp wrapper such that it becomes possible to stop execution after placements have been computed, i.e. skip guppy
+    - patch sepp-package/run-sepp.sh < ../onlyplacements.patch
+    # change DIR in SEPP wrapper to be relocatable
+    - patch sepp-package/run-sepp.sh < ../reloc.patch
+    # move SEPP to PREFIX
+    - mkdir -p $PREFIX/share/
+    - mv sepp-package $PREFIX/share/fragment-insertion
+    # configure SEPP
+    - cd $PREFIX/share/fragment-insertion/sepp/ && python setup.py config -c
+    # move SEPP binary into PREFIX/bin and update reference location
+    - mkdir -p $PREFIX/bin/
+    - mv ../run-sepp.sh $PREFIX/bin
+
+requirements:
+  build:
+    - python 3.5*
+    - setuptools
+    - java-jdk
+  run:
+    - python 3.5*
+    - setuptools
+    - java-jdk
+
+test:
+  files:
+    - ./input_fragments.fasta
+    - ./reference_alignment_tiny.fasta
+    - ./reference_phylogeny_tiny.nwk
+  commands:
+    # test with extra small reference files
+    - run-sepp.sh input_fragments.fasta testrun_tiny -a reference_alignment_tiny.fasta -t reference_phylogeny_tiny.nwk -x 1
+    - grep "f__Halomonadaceae" testrun_tiny_placement.tog.relabelled.tre
+    - grep "testseqd" testrun_tiny_placement.tog.relabelled.tre
+
+about:
+  summary: Insert Deblur fragments into GreenGenes phylogeny.
+  home: https://github.com/smirarab/sepp-refs
