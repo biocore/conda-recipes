@@ -26,6 +26,8 @@ build:
     # move SEPP binary into PREFIX/bin and update reference location
     - mkdir -p $PREFIX/bin/
     - mv ../run-sepp.sh $PREFIX/bin
+    # copy bundled binaries into $PREFIX/bin/ to 
+    - cp `cat $PREFIX/share/fragment-insertion/sepp/.sepp/main.config | grep "^path" -m 1 | cut -d "=" -f 2 | xargs dirname`/* $PREFIX/bin/
 
 requirements:
   build:
