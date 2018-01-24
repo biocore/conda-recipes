@@ -1,10 +1,10 @@
 package:
   name: deblur
-  version: "1.0.2"
+  version: "1.0.4"
 
 source:
   git_url: https://github.com/biocore/deblur.git
-  git_rev: 1.0.2
+  git_rev: 1.0.4
 
 build:
   number: 0
