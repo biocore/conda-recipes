@@ -1,10 +1,10 @@
 package:
   name: fragment-insertion
-  version: "4.3.4b"
+  version: "4.3.4c"
 
 source:
   - git_url: https://github.com/smirarab/sepp-refs.git
-  - git_rev: 4.3.4b
+  - git_rev: 4.3.4c
   - md5: 0eb27cf575689635c779c07ac3156cc3
   - path: onlyplacements.patch
   - path: reloc.patch
@@ -12,8 +12,18 @@ source:
 build:
   number: 0
   script:
+    # extract Silva reference files
+    - tar xjvf silva/sepp-package-silva.tar.bz sepp-package-silva/ref/
+    - tar xjvf silva/sepp-package-silva-2.tar.bz sepp-package-silva/ref/
     # unpack SEPP package
-    - cd gg && tar xjvf sepp-package.tar.bz    
+    - cd gg && tar xjvf sepp-package.tar.bz
+    # there seems to be an issue with condas otool parsing lib if binaries are not osx
+    # thus, I explicitly remove linux binaries here.
+    - rm -rf sepp-package/sepp/tools/bundled/Linux [osx]
+    # copy unpacked Silva references
+    - mv ../sepp-package-silva/ref/reference-99_otus_aligned_masked1977.fasta-rooted.tre sepp-package/ref/silva12.8_99otus_aligned_masked1977.tre
+    - mv ../sepp-package-silva/ref/RAxML_info.99_otus_aligned_masked1977.fasta           sepp-package/ref/silva12.8_99otus_aligned_masked1977.info
+    - mv ../sepp-package-silva/ref/99_otus_aligned_masked1977.fasta                      sepp-package/ref/silva12.8_99otus_aligned_masked1977.fasta
     # patch sepp wrapper such that it becomes possible to stop execution after placements have been computed, i.e. skip guppy
     - patch sepp-package/run-sepp.sh < ../onlyplacements.patch
     # change DIR in SEPP wrapper to be relocatable
@@ -31,11 +41,11 @@ build:
 
 requirements:
   build:
-    - python 3.5*
+    - python
     - setuptools
     - java-jdk
   run:
-    - python 3.5*
+    - python
     - setuptools
     - java-jdk
 
@@ -49,6 +59,10 @@ test:
     - run-sepp.sh input_fragments.fasta testrun_tiny -a reference_alignment_tiny.fasta -t reference_phylogeny_tiny.nwk -x 1
     - grep "f__Halomonadaceae" testrun_tiny_placement.tog.relabelled.tre
     - grep "testseqd" testrun_tiny_placement.tog.relabelled.tre
+    # test if new Silva reference files are copied to the right location
+    - ls $PREFIX/share/fragment-insertion/ref/silva12.8_99otus_aligned_masked1977.tre
+    - ls $PREFIX/share/fragment-insertion/ref/silva12.8_99otus_aligned_masked1977.info
+    - ls $PREFIX/share/fragment-insertion/ref/silva12.8_99otus_aligned_masked1977.fasta
 
 about:
   summary: Insert Deblur fragments into GreenGenes phylogeny.
