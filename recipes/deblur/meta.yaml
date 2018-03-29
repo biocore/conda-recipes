@@ -7,7 +7,7 @@ source:
   git_rev: 1.0.4
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -28,7 +28,7 @@ requirements:
     - setuptools
     - scikit-bio >=0.5.0
     - vsearch ==2.0.3
-    - mafft ==7.221
+    - mafft ==7.310
     - sortmerna ==2.0
     - biom-format
     - h5py
