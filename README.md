@@ -1,3 +1,5 @@
+# This repository is DEPRECATED. We recommend you submit your recipes to [bioconda](https://bioconda.github.io) or [conda-forge](https://conda-forge.org/)
+
 # `Conda Recipes`
 [![Travis Build Status](https://travis-ci.org/biocore/conda-recipes.png?branch=master)](https://travis-ci.org/biocore/conda-recipes)
 
