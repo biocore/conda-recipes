@@ -6,6 +6,9 @@ source:
   fn: transterm_hp_v2.09.zip
   url: http://transterm.cbcb.umd.edu/transterm_hp_v2.09.zip
 
+build:
+  number: 2
+
 requirements:
   build:
     - gcc
@@ -18,9 +21,10 @@ test:
     - test.tt
     - expterm.dat
   commands:
-    - transterm -p $PREFIX/lib/transtermhp/expterm.dat test.fasta test.coords > test.tt.obs
+    - transterm -p $TRANSTERMHP test.fasta test.coords > test.tt.obs
     - grep 'SEQUENCE gi|556503834|ref|NC_000913.3|1 Escherichia coli' test.tt.obs > /dev/null
     - grep 'SEQUENCE gi|556503834|ref|NC_000913.3|2 Escherichia coli' test.tt.obs > /dev/null
+
 about:
   summary: TransTermHP finds rho-independent transcription terminators in bacterial genomes
   home: http://transterm.cbcb.umd.edu/index.php
