@@ -1,13 +1,13 @@
 package:
   name: gneiss
-  version: 0.4.2
+  version: 0.4.4
 
 source:
   git_url: https://github.com/biocore/gneiss.git
-  git_rev: v0.4.2
+  git_rev: v0.4.4
 
 build:
-  number: 6
+  number: 1
 
 requirements:
   build:
